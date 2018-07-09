@@ -1,6 +1,6 @@
-package com.rephilo.luandun.application;
+package com.rephilo.luandun;
 
-import com.rephilo.luandun.application.Application;
+import com.rephilo.luandun.Application;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 

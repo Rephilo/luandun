@@ -1,4 +1,4 @@
-package com.rephilo.luandun.application;
+package com.rephilo.luandun;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

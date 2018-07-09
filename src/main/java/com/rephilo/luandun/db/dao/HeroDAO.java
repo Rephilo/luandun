@@ -1,4 +1,6 @@
 package com.rephilo.luandun.db.dao;
 
-public interface HeroDAO {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface HeroDAO extends JpaRepository {
 }
