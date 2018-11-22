@@ -2,6 +2,8 @@ package com.rephilo.luandun.model;
 
 import org.springframework.data.elasticsearch.annotations.Document;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.util.ArrayList;
 
 /**
@@ -9,11 +11,13 @@ import java.util.ArrayList;
  *
  * @author rephilo
  */
+@Entity
 @Document(indexName = "")
 public class Book {
     /**
      * 主键id
      */
+    @Id
     private int id;
     /**
      * 封面
@@ -22,7 +26,7 @@ public class Book {
     /**
      * 主标题
      */
-    private String mainTitle;
+    private String title;
     /**
      * 副标题
      */
@@ -64,12 +68,12 @@ public class Book {
         this.imageUrl = imageUrl;
     }
 
-    public String getMainTitle() {
-        return mainTitle;
+    public String getTitle() {
+        return title;
     }
 
-    public void setMainTitle(String mainTitle) {
-        this.mainTitle = mainTitle;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getSubTitle() {
