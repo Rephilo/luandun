@@ -21,14 +21,13 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  */
 @EnableSwagger2
 @Configuration
-@ComponentScan(basePackages = "com.rephilo.luandun.controller")
 public class SwaggerConfig {
 
     @Bean
     public Docket luandunApi() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
-                .apis(RequestHandlerSelectors.any())
+                .apis(RequestHandlerSelectors.basePackage("com.rephilo.luandun.controller"))
                 .paths(PathSelectors.any())
                 .build()
                 .apiInfo(apiInfo());
@@ -36,13 +35,13 @@ public class SwaggerConfig {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("不知道为什么就想加个API文档")
-                .description("说出来你可能不信，就是我拿来写着玩的服务")
+                .title("自用型数据结构与算法服务 API")
+                .description("页面不会写，就拿swagger-ui凑合一下吧")
 //                .termsOfServiceUrl("http://springfox.io")
 //                .license("Apache License Version 2.0")
 //                .licenseUrl("https://github.com/springfox/springfox/blob/master/LICENSE")
                 .version("2.0")
-                .contact(new Contact("呵呵", "http://没有博客.com", "rephilo@163.com"))
+                .contact(new Contact("黄浦江自由泳技术提高班", "http://.com", "rephilo@163.com"))
                 .build();
     }
 //
