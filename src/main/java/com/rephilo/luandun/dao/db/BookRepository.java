@@ -1,6 +1,6 @@
 package com.rephilo.luandun.dao.db;
 
-import com.rephilo.luandun.model.Book;
+import com.rephilo.luandun.model.db.Book;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

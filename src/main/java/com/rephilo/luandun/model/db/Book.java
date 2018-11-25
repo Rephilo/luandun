@@ -1,4 +1,4 @@
-package com.rephilo.luandun.model;
+package com.rephilo.luandun.model.db;
 
 import org.springframework.data.elasticsearch.annotations.Document;
 

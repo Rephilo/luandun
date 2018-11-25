@@ -20,7 +20,7 @@ import java.net.InetAddress;
 @EnableElasticsearchRepositories(basePackages = "com.rephilo.luandun.dao.es")
 public class ElasticSearchConfig {
 
-    @Bean
+//    @Bean
     public TransportClient transportClient() throws Exception {
         //初始化配置
         Settings settings = Settings.builder()
@@ -39,7 +39,7 @@ public class ElasticSearchConfig {
      * @return
      * @throws Exception
      */
-    @Bean
+//    @Bean
     public ElasticsearchTemplate elasticsearchTemplate() throws Exception {
         return new ElasticsearchTemplate(transportClient());
     }

@@ -1,6 +1,6 @@
 package com.rephilo.luandun.dao.es;
 
-import com.rephilo.luandun.model.Book;
+import com.rephilo.luandun.model.db.Book;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

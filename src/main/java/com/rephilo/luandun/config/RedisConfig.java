@@ -12,10 +12,10 @@ import org.springframework.data.redis.serializer.RedisSerializationContext;
  *
  * @author rephilo
  */
-@Configuration
+//@Configuration
 public class RedisConfig {
-    @Bean
-    public ReactiveRedisTemplate<String, String> reactiveRedisTemplate() {
-        return new ReactiveRedisTemplate<>(new LettuceConnectionFactory("localhost", 6379), RedisSerializationContext.string());
-    }
+//    @Bean
+//    public ReactiveRedisTemplate<String, String> reactiveRedisTemplate() {
+//        return new ReactiveRedisTemplate<>(new LettuceConnectionFactory("localhost", 6379), RedisSerializationContext.string());
+//    }
 }
