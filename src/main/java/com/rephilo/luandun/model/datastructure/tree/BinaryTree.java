@@ -55,31 +55,53 @@ public abstract class BinaryTree {
     public abstract BinaryTreeNode getRightSibling(BinaryTreeNode current);
 
     /**
-     * 前序遍历
+     * 深度优先前序遍历
      *
      * @param root
      */
-    public abstract void preOrder(BinaryTreeNode root);
+    public void preOrder(BinaryTreeNode root) {
+        if (root != null) {
+            visit(root);
+            preOrder(root.getLeftChild());
+            preOrder(root.getRightChild());
+        }
+    }
 
     /**
-     * 中序遍历
+     * 深度优先中序遍历
      *
      * @param root
      */
-    public abstract void inOrder(BinaryTreeNode root);
+    public void inOrder(BinaryTreeNode root) {
+        if (root != null) {
+            inOrder(root.getLeftChild());
+            visit(root);
+            inOrder(root.getRightChild());
+        }
+    }
 
     /**
-     * 后序遍历
+     * 深度优先后序遍历
      *
      * @param root
      */
-    public abstract void postOrder(BinaryTreeNode root);
+    public void postOrder(BinaryTreeNode root) {
+        if (root != null) {
+            postOrder(root.getLeftChild());
+            postOrder(root.getRightChild());
+            visit(root);
+        }
+    }
 
     /**
-     * 层次遍历
+     * 广度优先遍历
      *
      * @param root
      */
     public abstract void levelOrder(BinaryTreeNode root);
 //    public abstract void CreateTree(T info, BinaryTree leftTree, BinaryTree rightTree);
+
+    public BinaryTreeNode visit(BinaryTreeNode root) {
+        return getRoot();
+    }
 }
