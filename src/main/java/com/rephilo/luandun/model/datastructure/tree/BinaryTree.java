@@ -1,16 +1,22 @@
 package com.rephilo.luandun.model.datastructure.tree;
 
 
+import com.google.common.collect.Queues;
+
+import java.util.ArrayDeque;
+import java.util.Queue;
+import java.util.Stack;
+
 /**
  * 二叉树数据结构
  *
  * @author rephilo
  */
-public abstract class BinaryTree {
+public class BinaryTree<T> {
     /**
      * 根节点
      */
-    private BinaryTreeNode root;
+    private BinaryTreeNode<T> root;
 
     public BinaryTree() {
         this.root = null;
@@ -21,45 +27,83 @@ public abstract class BinaryTree {
      *
      * @return
      */
-    public abstract boolean isEmpty();
+    public boolean isEmpty() {
+        return getRoot() == null;
+    }
 
     /**
-     * 获取根节点
+     * 访问节点
+     *
+     * @param current
+     */
+    public void visit(BinaryTreeNode current) {
+        System.out.println(root.getValue());
+    }
+
+    /**
+     * 返回根节点
      *
      * @return
      */
-    public abstract BinaryTreeNode getRoot();
+    public BinaryTreeNode<T> getRoot() {
+        return root;
+    }
+
+    public void setRoot(BinaryTreeNode<T> root) {
+        this.root = root;
+    }
 
     /**
-     * 获取父节点
+     * 获取父节点(借助栈实现)
      *
      * @param current
      * @return
      */
-    public abstract BinaryTreeNode getParent(BinaryTreeNode current);
+    public BinaryTreeNode getParent(BinaryTreeNode<T> current) {
+        Stack<BinaryTreeNode<T>> stack = new Stack<>();
+        BinaryTreeNode<T> pointer = root;
+        if (root != null && current != null) {
+            while (stack.empty()) {
+                if (pointer != null) {
+                    if (current == pointer.getLeftChild() || current == pointer.getRightChild()) {
+                        return pointer;
+                    } else {
+                        stack.push(pointer);
+                        pointer = pointer.getLeftChild();
+                    }
+                } else {
+                    pointer = stack.peek();
+                    stack.pop();
+                    pointer = pointer.getRightChild();
+                }
+            }
+        }
 
-    /**
-     * 获取左兄弟节点
-     *
-     * @param current
-     * @return
-     */
-    public abstract BinaryTreeNode getLeftSibling(BinaryTreeNode current);
+        return null;
+    }
 
-    /**
-     * 获取右兄弟节点
-     *
-     * @param current
-     * @return
-     */
-    public abstract BinaryTreeNode getRightSibling(BinaryTreeNode current);
+//    /**
+//     * 获取左兄弟节点
+//     *
+//     * @param current
+//     * @return
+//     */
+//    public abstract BinaryTreeNode getLeftSibling(BinaryTreeNode<T> current);
+//
+//    /**
+//     * 获取右兄弟节点
+//     *
+//     * @param current
+//     * @return
+//     */
+//    public abstract BinaryTreeNode getRightSibling(BinaryTreeNode<T> current);
 
     /**
      * 深度优先前序遍历
      *
      * @param root
      */
-    public void preOrder(BinaryTreeNode root) {
+    public void preOrder(BinaryTreeNode<T> root) {
         if (root != null) {
             visit(root);
             preOrder(root.getLeftChild());
@@ -72,7 +116,7 @@ public abstract class BinaryTree {
      *
      * @param root
      */
-    public void inOrder(BinaryTreeNode root) {
+    public void inOrder(BinaryTreeNode<T> root) {
         if (root != null) {
             inOrder(root.getLeftChild());
             visit(root);
@@ -85,7 +129,7 @@ public abstract class BinaryTree {
      *
      * @param root
      */
-    public void postOrder(BinaryTreeNode root) {
+    public void postOrder(BinaryTreeNode<T> root) {
         if (root != null) {
             postOrder(root.getLeftChild());
             postOrder(root.getRightChild());
@@ -94,14 +138,47 @@ public abstract class BinaryTree {
     }
 
     /**
-     * 广度优先遍历
+     * 广度优先遍历(借助队列实现)
      *
      * @param root
      */
-    public abstract void levelOrder(BinaryTreeNode root);
-//    public abstract void CreateTree(T info, BinaryTree leftTree, BinaryTree rightTree);
+    public void levelOrder(BinaryTreeNode<T> root) {
+        Queue<BinaryTreeNode<T>> nodeQueue = Queues.newLinkedBlockingQueue();
+        BinaryTreeNode<T> currentNode = root;
+        if (currentNode != null) {
+            nodeQueue.add(currentNode);
+        }
 
-    public BinaryTreeNode visit(BinaryTreeNode root) {
-        return getRoot();
+        while (!nodeQueue.isEmpty()) {
+            currentNode = nodeQueue.poll();
+            visit(currentNode);
+
+            if (currentNode.getLeftChild() != null) {
+                nodeQueue.add(currentNode.getLeftChild());
+            }
+
+            if (currentNode.getRightChild() != null) {
+                nodeQueue.add(currentNode.getRightChild());
+            }
+        }
+
+
+    }
+
+    /**
+     * 创建二叉树
+     *
+     * @param info
+     * @param leftTree
+     * @param rightTree
+     * @return
+     */
+    public BinaryTree<T> createTree(T info, BinaryTree<T> leftTree, BinaryTree<T> rightTree) {
+        BinaryTree<T> tree = new BinaryTree<T>();
+        tree.setRoot(new BinaryTreeNode<T>(info, leftTree.getRoot(), rightTree.getRoot()));
+        leftTree.setRoot(null);
+        rightTree.setRoot(null);
+
+        return tree;
     }
 }

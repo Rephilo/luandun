@@ -6,8 +6,12 @@ package com.rephilo.luandun.model.datastructure.tree;
  * @param <T>
  * @author rephilo
  */
-public abstract class BinaryTreeNode<T> {
+public class BinaryTreeNode<T> {
     private T value;
+
+    private BinaryTreeNode<T> leftChild;
+
+    private BinaryTreeNode<T> rightChild;
 
     public BinaryTreeNode() {
 
@@ -18,20 +22,35 @@ public abstract class BinaryTreeNode<T> {
     }
 
     public BinaryTreeNode(T value, BinaryTreeNode<T> leftChild, BinaryTreeNode<T> rightChild) {
-
+        this.value = value;
+        this.leftChild = leftChild;
+        this.rightChild = rightChild;
     }
 
-    public abstract T getalue();
+//    public abstract boolean isLeaf();
 
-    public abstract void setValue();
 
-    public abstract BinaryTreeNode<T> getLeftChild();
+    public T getValue() {
+        return value;
+    }
 
-    public abstract BinaryTreeNode<T> getRightChild();
+    public void setValue(T value) {
+        this.value = value;
+    }
 
-    public abstract void setLeftChild();
+    public BinaryTreeNode<T> getLeftChild() {
+        return leftChild;
+    }
 
-    public abstract void setRightChild();
+    public void setLeftChild(BinaryTreeNode<T> leftChild) {
+        this.leftChild = leftChild;
+    }
 
-    public abstract boolean isLeaf();
+    public BinaryTreeNode<T> getRightChild() {
+        return rightChild;
+    }
+
+    public void setRightChild(BinaryTreeNode<T> rightChild) {
+        this.rightChild = rightChild;
+    }
 }
