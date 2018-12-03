@@ -3,25 +3,24 @@ package com.rephilo.luandun.model.datastructure.tree;
 /**
  * 二叉树结点数据结构
  *
- * @param <T>
  * @author rephilo
  */
-public class BinaryTreeNode<T> {
-    private T value;
+public class BinaryTreeNode {
+    private int value;
 
-    private BinaryTreeNode<T> leftChild;
+    private BinaryTreeNode leftChild;
 
-    private BinaryTreeNode<T> rightChild;
+    private BinaryTreeNode rightChild;
 
     public BinaryTreeNode() {
 
     }
 
-    public BinaryTreeNode(T value) {
-
+    public BinaryTreeNode(int value) {
+        this.value = value;
     }
 
-    public BinaryTreeNode(T value, BinaryTreeNode<T> leftChild, BinaryTreeNode<T> rightChild) {
+    public BinaryTreeNode(int value, BinaryTreeNode leftChild, BinaryTreeNode rightChild) {
         this.value = value;
         this.leftChild = leftChild;
         this.rightChild = rightChild;
@@ -30,27 +29,27 @@ public class BinaryTreeNode<T> {
 //    public abstract boolean isLeaf();
 
 
-    public T getValue() {
+    public int getValue() {
         return value;
     }
 
-    public void setValue(T value) {
+    public void setValue(int value) {
         this.value = value;
     }
 
-    public BinaryTreeNode<T> getLeftChild() {
+    public BinaryTreeNode getLeftChild() {
         return leftChild;
     }
 
-    public void setLeftChild(BinaryTreeNode<T> leftChild) {
+    public void setLeftChild(BinaryTreeNode leftChild) {
         this.leftChild = leftChild;
     }
 
-    public BinaryTreeNode<T> getRightChild() {
+    public BinaryTreeNode getRightChild() {
         return rightChild;
     }
 
-    public void setRightChild(BinaryTreeNode<T> rightChild) {
+    public void setRightChild(BinaryTreeNode rightChild) {
         this.rightChild = rightChild;
     }
 }

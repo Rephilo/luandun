@@ -12,11 +12,11 @@ import java.util.Stack;
  *
  * @author rephilo
  */
-public class BinaryTree<T> {
+public class BinaryTree {
     /**
      * 根节点
      */
-    private BinaryTreeNode<T> root;
+    private BinaryTreeNode root;
 
     public BinaryTree() {
         this.root = null;
@@ -45,11 +45,11 @@ public class BinaryTree<T> {
      *
      * @return
      */
-    public BinaryTreeNode<T> getRoot() {
+    public BinaryTreeNode getRoot() {
         return root;
     }
 
-    public void setRoot(BinaryTreeNode<T> root) {
+    public void setRoot(BinaryTreeNode root) {
         this.root = root;
     }
 
@@ -59,9 +59,9 @@ public class BinaryTree<T> {
      * @param current
      * @return
      */
-    public BinaryTreeNode getParent(BinaryTreeNode<T> current) {
-        Stack<BinaryTreeNode<T>> stack = new Stack<>();
-        BinaryTreeNode<T> pointer = root;
+    public BinaryTreeNode getParent(BinaryTreeNode current) {
+        Stack<BinaryTreeNode> stack = new Stack<>();
+        BinaryTreeNode pointer = root;
         if (root != null && current != null) {
             while (stack.empty()) {
                 if (pointer != null) {
@@ -103,7 +103,7 @@ public class BinaryTree<T> {
      *
      * @param root
      */
-    public void preOrder(BinaryTreeNode<T> root) {
+    public void preOrder(BinaryTreeNode root) {
         if (root != null) {
             visit(root);
             preOrder(root.getLeftChild());
@@ -116,7 +116,7 @@ public class BinaryTree<T> {
      *
      * @param root
      */
-    public void inOrder(BinaryTreeNode<T> root) {
+    public void inOrder(BinaryTreeNode root) {
         if (root != null) {
             inOrder(root.getLeftChild());
             visit(root);
@@ -129,7 +129,7 @@ public class BinaryTree<T> {
      *
      * @param root
      */
-    public void postOrder(BinaryTreeNode<T> root) {
+    public void postOrder(BinaryTreeNode root) {
         if (root != null) {
             postOrder(root.getLeftChild());
             postOrder(root.getRightChild());
@@ -142,9 +142,9 @@ public class BinaryTree<T> {
      *
      * @param root
      */
-    public void levelOrder(BinaryTreeNode<T> root) {
-        Queue<BinaryTreeNode<T>> nodeQueue = Queues.newLinkedBlockingQueue();
-        BinaryTreeNode<T> currentNode = root;
+    public void levelOrder(BinaryTreeNode root) {
+        Queue<BinaryTreeNode> nodeQueue = Queues.newLinkedBlockingQueue();
+        BinaryTreeNode currentNode = root;
         if (currentNode != null) {
             nodeQueue.add(currentNode);
         }
@@ -173,9 +173,9 @@ public class BinaryTree<T> {
      * @param rightTree
      * @return
      */
-    public BinaryTree<T> createTree(T info, BinaryTree<T> leftTree, BinaryTree<T> rightTree) {
-        BinaryTree<T> tree = new BinaryTree<T>();
-        tree.setRoot(new BinaryTreeNode<T>(info, leftTree.getRoot(), rightTree.getRoot()));
+    public BinaryTree createTree(int info, BinaryTree leftTree, BinaryTree rightTree) {
+        BinaryTree tree = new BinaryTree();
+        tree.setRoot(new BinaryTreeNode(info, leftTree.getRoot(), rightTree.getRoot()));
         leftTree.setRoot(null);
         rightTree.setRoot(null);
 
