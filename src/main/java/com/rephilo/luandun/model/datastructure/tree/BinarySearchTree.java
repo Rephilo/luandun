@@ -75,5 +75,14 @@ public class BinarySearchTree extends BinaryTree {
             tempPointer.setRightChild(element.getRightChild());
         }
 
+        if (parent == null) {
+            setRoot(tempPointer);
+        } else if (parent.getLeftChild() == element) {
+            parent.setLeftChild(tempPointer);
+        } else {
+            parent.setRightChild(tempPointer);
+        }
+
+        return;
     }
 }
