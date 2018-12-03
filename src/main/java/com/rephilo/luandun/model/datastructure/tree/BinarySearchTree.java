@@ -82,7 +82,5 @@ public class BinarySearchTree extends BinaryTree {
         } else {
             parent.setRightChild(tempPointer);
         }
-
-        return;
     }
 }
