@@ -1,5 +1,9 @@
 package com.rephilo.luandun.model.datastructure.tree;
 
+import com.google.common.collect.Lists;
+
+import java.util.List;
+
 /**
  * 二叉搜索树
  *
@@ -51,6 +55,8 @@ public class BinarySearchTree extends BinaryTree {
         if (element == null) {
             return;
         }
+
+        List<Integer> list= Lists.newArrayList();
 
         BinaryTreeNode tempPointer;
         BinaryTreeNode tempParent = null;

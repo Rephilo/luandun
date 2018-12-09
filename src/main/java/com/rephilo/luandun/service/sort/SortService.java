@@ -2,6 +2,7 @@ package com.rephilo.luandun.service.sort;
 
 import com.rephilo.luandun.annotation.CountDown;
 import com.rephilo.luandun.constant.SortConstant;
+import com.rephilo.luandun.model.datastructure.heap.MinHeap;
 import com.rephilo.luandun.model.vo.SortResultVO;
 import com.rephilo.luandun.utils.LuandunUtils;
 import org.springframework.stereotype.Service;
@@ -124,7 +125,7 @@ public class SortService {
     @CountDown
     public SortResultVO heapSort(int[] array) {
         SortResultVO resultVO = new SortResultVO();
-
+        MinHeap minHeap=new MinHeap(array.length);
         resultVO.setResult(array);
 
         return resultVO;

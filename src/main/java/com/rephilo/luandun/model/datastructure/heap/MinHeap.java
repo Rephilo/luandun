@@ -1,5 +1,7 @@
 package com.rephilo.luandun.model.datastructure.heap;
 
+import com.rephilo.luandun.utils.LuandunUtils;
+
 /**
  * 最小堆
  *
@@ -64,7 +66,17 @@ public class MinHeap extends Heap {
         return true;
     }
 
-    public int removeMin(){
-        return 0;
+    public int removeMin() {
+        if (getCurrentSize() == 0) {
+            return 0;
+        } else {
+            int newSize = getCurrentSize() - 1;
+            setCurrentSize(newSize);
+            LuandunUtils.swap(getHeapArray(), 0, newSize);
+            if (getCurrentSize() > 1) {
+                shiftDown(0);
+            }
+            return getHeapArray()[getCurrentSize()];
+        }
     }
 }

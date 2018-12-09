@@ -87,6 +87,7 @@
             <version>${commons-lang3.version}</version>
         </dependency>
 
+        <!--swagger支持-->
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
@@ -98,7 +99,6 @@
                 </exclusion>
             </exclusions>
         </dependency>
-
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger-ui</artifactId>
