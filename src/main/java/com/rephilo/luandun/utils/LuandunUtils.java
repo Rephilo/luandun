@@ -1,5 +1,7 @@
 package com.rephilo.luandun.utils;
 
+import com.rephilo.luandun.model.datastructure.tree.BinaryTreeNode;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -34,5 +36,14 @@ public class LuandunUtils {
         array[idx] = array[idy];
         array[idy] = swap;
         return true;
+    }
+
+    public static <T> boolean isLessThan(BinaryTreeNode<T> left, BinaryTreeNode<T> right) {
+        if (left.getValue() instanceof Integer &&
+                right.getValue() instanceof Integer) {
+            return (Integer) left.getValue() < (Integer) right.getValue();
+        } else {
+            return false;
+        }
     }
 }

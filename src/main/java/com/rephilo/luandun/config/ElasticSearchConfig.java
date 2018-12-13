@@ -17,7 +17,7 @@ import java.net.InetAddress;
  * @author rephilo
  */
 @Configuration
-@EnableElasticsearchRepositories(basePackages = "com.rephilo.luandun.dao.es")
+//@EnableElasticsearchRepositories(basePackages = "com.rephilo.luandun.dao.es")
 public class ElasticSearchConfig {
 
 //    @Bean

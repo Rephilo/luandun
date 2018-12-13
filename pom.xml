@@ -24,6 +24,7 @@
         <druid.version>1.1.10</druid.version>
         <guava.version>27.0-jre</guava.version>
         <commons-lang3.version>3.8.1</commons-lang3.version>
+        <swagger.version>2.9.2</swagger.version>
     </properties>
 
     <dependencies>
@@ -86,10 +87,11 @@
             <version>${commons-lang3.version}</version>
         </dependency>
 
+        <!--swagger支持-->
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
-            <version>2.9.2</version>
+            <version>${swagger.version}</version>
             <exclusions>
                 <exclusion>
                     <artifactId>guava</artifactId>
@@ -97,11 +99,10 @@
                 </exclusion>
             </exclusions>
         </dependency>
-
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger-ui</artifactId>
-            <version>2.9.2</version>
+            <version>${swagger.version}</version>
         </dependency>
     </dependencies>
 

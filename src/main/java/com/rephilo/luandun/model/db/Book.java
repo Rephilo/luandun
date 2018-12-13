@@ -1,10 +1,7 @@
 package com.rephilo.luandun.model.db;
 
-import org.springframework.data.elasticsearch.annotations.Document;
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import java.util.ArrayList;
 
 /**
  * 书籍实体
@@ -12,7 +9,6 @@ import java.util.ArrayList;
  * @author rephilo
  */
 @Entity
-@Document(indexName = "")
 public class Book {
     /**
      * 主键id

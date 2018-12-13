@@ -14,13 +14,13 @@ import javax.sql.DataSource;
  *
  * @author rephilo
  */
-//@Configuration
-//@EnableTransactionManagement
-//@EnableJpaRepositories(basePackages = "com.rephilo.luandun.dao.db")
+@Configuration
+@EnableTransactionManagement
+@EnableJpaRepositories(basePackages = "com.rephilo.luandun.dao.db")
 public class DataBaseConfig {
-//    @Primary
-//    @Bean
-//    public DataSource dataSource(){
-//        return DruidDataSourceBuilder.create().build();
-//    }
+    @Primary
+    @Bean
+    public DataSource dataSource(){
+        return DruidDataSourceBuilder.create().build();
+    }
 }
