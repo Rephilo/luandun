@@ -38,12 +38,12 @@ public class LuandunUtils {
         return true;
     }
 
-    public static <T> boolean isLessThan(BinaryTreeNode<T> left, BinaryTreeNode<T> right) {
-        if (left.getValue() instanceof Integer &&
-                right.getValue() instanceof Integer) {
-            return (Integer) left.getValue() < (Integer) right.getValue();
-        } else {
-            return false;
-        }
-    }
+//    public static <T> boolean isLessThan(BinaryTreeNode<T> left, BinaryTreeNode<T> right) {
+//        if (left.getValue() instanceof Integer &&
+//                right.getValue() instanceof Integer) {
+//            return (Integer) left.getValue() < (Integer) right.getValue();
+//        } else {
+//            return false;
+//        }
+//    }
 }

@@ -42,6 +42,9 @@ public class RandomService {
      * @return 随机数数组
      */
     public int[] getRandomNumberInts(RandomParam param) {
-        return getRandomNumberList(param).stream().mapToInt(Integer::intValue).toArray();
+        return getRandomNumberList(param)
+                .stream()
+                .mapToInt(Integer::intValue)
+                .toArray();
     }
 }

@@ -8,24 +8,24 @@ import java.util.concurrent.ForkJoinPool;
  * @author rephilo
  */
 public class ForkJoinPoolUtils {
-//    private static ForkJoinPoolUtils Instance = new ForkJoinPoolUtils();
-//
-//    public static ForkJoinPoolUtils getInstance() {
-//        return Instance;
-//    }
-//
-//    private ForkJoinPool taskPool = null;
-//
-//    private ForkJoinPoolUtils() {
-//        init();
-//    }
-//
-//    private void init() {
-//        taskPool = new ForkJoinPool();
-//    }
-//
-//    public ForkJoinPool getTaskPool() {
-//        return taskPool;
-//    }
+    private static ForkJoinPoolUtils Instance = new ForkJoinPoolUtils();
+
+    public static ForkJoinPoolUtils getInstance() {
+        return Instance;
+    }
+
+    private ForkJoinPool taskPool = null;
+
+    private ForkJoinPoolUtils() {
+        init();
+    }
+
+    private void init() {
+        taskPool = new ForkJoinPool();
+    }
+
+    public ForkJoinPool getTaskPool() {
+        return taskPool;
+    }
 }
 

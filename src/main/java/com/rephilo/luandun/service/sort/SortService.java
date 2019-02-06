@@ -125,7 +125,7 @@ public class SortService {
     @CountDown
     public SortResultVO heapSort(int[] array) {
         SortResultVO resultVO = new SortResultVO();
-        MinHeap minHeap=new MinHeap(array.length);
+        MinHeap minHeap = new MinHeap(array.length);
         resultVO.setResult(array);
 
         return resultVO;
