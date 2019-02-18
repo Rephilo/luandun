@@ -1,5 +1,6 @@
 package com.rephilo.luandun.utils;
 
+import com.google.common.collect.Lists;
 import com.rephilo.luandun.model.datastructure.tree.BinaryTreeNode;
 
 import java.util.Arrays;
@@ -38,12 +39,15 @@ public class LuandunUtils {
         return true;
     }
 
-//    public static <T> boolean isLessThan(BinaryTreeNode<T> left, BinaryTreeNode<T> right) {
-//        if (left.getValue() instanceof Integer &&
-//                right.getValue() instanceof Integer) {
-//            return (Integer) left.getValue() < (Integer) right.getValue();
-//        } else {
-//            return false;
-//        }
-//    }
+    /**
+     * 按照矩阵格式输出数组
+     *
+     * @param array
+     * @return
+     */
+    public List<String> layoutArray(int[][] array) {
+        List<String> matrixSimulator = Lists.newArrayList();
+        //todo:stream实现多维数组遍历
+        return matrixSimulator;
+    }
 }
