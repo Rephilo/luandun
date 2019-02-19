@@ -34,4 +34,15 @@ public class ArrayController {
                            @RequestParam(required = false, defaultValue = "0") Integer y) {
         return LuandunUtils.layoutArray(arrayService.diagonal(n, x, y));
     }
+
+    /**
+     * 二分查找
+     *
+     * @return
+     */
+    @GetMapping("binarySearch")
+    public Object binarySearchArray(@RequestParam(required = false, defaultValue = "0") Integer key,
+                                    @RequestParam(required = false) int[] data) {
+        return arrayService.binarySearchArray(key, data);
+    }
 }
