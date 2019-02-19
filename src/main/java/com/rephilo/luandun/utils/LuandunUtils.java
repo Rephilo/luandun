@@ -6,6 +6,7 @@ import com.rephilo.luandun.model.datastructure.tree.BinaryTreeNode;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * 操作工具包
@@ -45,9 +46,9 @@ public class LuandunUtils {
      * @param array
      * @return
      */
-    public List<String> layoutArray(int[][] array) {
-        List<String> matrixSimulator = Lists.newArrayList();
-        //todo:stream实现多维数组遍历
-        return matrixSimulator;
+    public static List<String> layoutArray(int[][] array) {
+        return Arrays.stream(array)
+                .map(e -> String.join(",", Arrays.toString(e)))
+                .collect(Collectors.toList());
     }
 }
