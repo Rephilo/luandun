@@ -2,8 +2,6 @@ package com.rephilo.luandun.service.datastructure;
 
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 /**
  * 极简数据结构 第1章
  *
