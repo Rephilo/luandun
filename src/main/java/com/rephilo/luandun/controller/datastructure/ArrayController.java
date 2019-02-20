@@ -45,4 +45,15 @@ public class ArrayController {
                                     @RequestParam(required = false) int[] data) {
         return arrayService.binarySearchArray(key, data);
     }
+
+    /**
+     * 3n+1
+     *
+     * @param num
+     * @return
+     */
+    @GetMapping("collatz")
+    public Object memorizedCollatz(@RequestParam(required = false, defaultValue = "99") Integer num) {
+        return arrayService.memorizedCollatz(new int[10], num);
+    }
 }

@@ -38,9 +38,9 @@ public class ArrayService {
     /**
      * 二分查找
      *
-     * @param key   关键字
-     * @param data  查找范围数组
-     * @return      查找结果下标
+     * @param key  关键字
+     * @param data 查找范围数组
+     * @return 查找结果下标
      */
     public int binarySearchArray(int key, int[] data) {
         int size = data.length;
@@ -62,5 +62,25 @@ public class ArrayService {
         }
 
         return -1;
+    }
+
+    /**
+     * 3n+1问题
+     *
+     * @param memory
+     * @param num
+     * @return
+     */
+    public int memorizedCollatz(int[] memory, int num) {
+        int partResult = 0;
+        while (num >= memory.length) {
+            num = (num % 2 == 0) ? num / 2 : 3 * num + 1;
+            ++partResult;
+        }
+        if (memory[num] == 0 && num > 0) {
+            memory[num] = memorizedCollatz(memory, (num % 2 == 0) ? num / 2 : 3 * num + 1);
+        }
+
+        return memory[num] + partResult;
     }
 }
