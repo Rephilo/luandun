@@ -51,4 +51,19 @@ public class LuandunUtils {
                 .map(e -> String.join(",", Arrays.toString(e)))
                 .collect(Collectors.toList());
     }
+
+    /**
+     * 生成一个迷宫的例子
+     *
+     * @return
+     */
+    public static Character[][] getMazeExample() {
+        return new Character[][]{
+                {'*', '*', '*', '*', '*', '*', '*'},
+                {'*', '0', '*', '0', '0', '0', '*'},
+                {'*', '0', '*', '0', '*', '0', '*'},
+                {'*', '0', '0', '0', '*', '0', '*'},
+                {'*', '*', '*', '*', '*', '*', '*'}
+        };
+    }
 }

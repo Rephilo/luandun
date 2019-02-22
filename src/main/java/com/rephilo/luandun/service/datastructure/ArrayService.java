@@ -65,9 +65,9 @@ public class ArrayService {
     /**
      * 3n+1问题
      *
-     * @param memory
-     * @param num
-     * @return
+     * @param memory 记忆数组
+     * @param num    要处理的数字
+     * @return 化简次数
      */
     public int memorizedCollatz(int[] memory, int num) {
         int partResult = 0;

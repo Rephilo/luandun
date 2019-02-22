@@ -1,8 +1,12 @@
 package com.rephilo.luandun.service.datastructure;
 
+import com.google.common.collect.Lists;
+import com.rephilo.luandun.model.datastructure.stack.MazeStatus;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Stack;
+import java.util.Vector;
 
 /**
  * 极简数据结构 第5章

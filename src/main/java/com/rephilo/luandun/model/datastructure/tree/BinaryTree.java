@@ -22,29 +22,6 @@ public class BinaryTree {
         this.root = null;
     }
 
-    /**
-     * 是否为空树
-     *
-     * @return
-     */
-    public boolean isEmpty() {
-        return getRoot() == null;
-    }
-
-    /**
-     * 访问节点
-     *
-     * @param current
-     */
-    public void visit(BinaryTreeNode current) {
-        System.out.println(root.getValue());
-    }
-
-    /**
-     * 返回根节点
-     *
-     * @return
-     */
     public BinaryTreeNode getRoot() {
         return root;
     }
@@ -54,131 +31,141 @@ public class BinaryTree {
     }
 
     /**
-     * 获取父节点(借助栈实现)
+     * 查找
      *
-     * @param current
+     * @param key
      * @return
      */
-    public BinaryTreeNode getParent(BinaryTreeNode current) {
-        Stack<BinaryTreeNode> stack = new Stack<>();
-        BinaryTreeNode pointer = root;
-        if (root != null && current != null) {
-            while (stack.empty()) {
-                if (pointer != null) {
-                    if (current == pointer.getLeftChild() || current == pointer.getRightChild()) {
-                        return pointer;
-                    } else {
-                        stack.push(pointer);
-                        pointer = pointer.getLeftChild();
-                    }
-                } else {
-                    pointer = stack.peek();
-                    stack.pop();
-                    pointer = pointer.getRightChild();
+    public BinaryTreeNode find(int key) {
+        BinaryTreeNode current = root;
+        while (current != null) {
+            if (key < current.getData()) {
+                if (current.getLeft() == null) {
+                    return current;
                 }
+
+                current = current.getLeft();
+            } else if (key > current.getData()) {
+                if (current.getRight() == null) {
+                    return current;
+                }
+
+                current = current.getRight();
+            } else {
+                return current;
             }
         }
 
         return null;
     }
 
-//    /**
-//     * 获取左兄弟节点
-//     *
-//     * @param current
-//     * @return
-//     */
-//    public abstract BinaryTreeNode getLeftSibling(BinaryTreeNode<T> current);
-//
-//    /**
-//     * 获取右兄弟节点
-//     *
-//     * @param current
-//     * @return
-//     */
-//    public abstract BinaryTreeNode getRightSibling(BinaryTreeNode<T> current);
+    public void put(int value) {
+        BinaryTreeNode newNode = new BinaryTreeNode(value);
+        if (root == null) {
+            root = newNode;
+        } else {
+            BinaryTreeNode parent = find(value);
+            if (value < parent.getData()) {
+                parent.setLeft(newNode);
+                parent.getLeft().setParent(parent);
+            } else {
+                parent.setRight(newNode);
+                parent.getRight().setParent(parent);
 
-    /**
-     * 深度优先前序遍历
-     *
-     * @param root
-     */
-    public void preOrder(BinaryTreeNode root) {
-        if (root != null) {
-            visit(root);
-            preOrder(root.getLeftChild());
-            preOrder(root.getRightChild());
-        }
-    }
-
-    /**
-     * 深度优先中序遍历
-     *
-     * @param root
-     */
-    public void inOrder(BinaryTreeNode root) {
-        if (root != null) {
-            inOrder(root.getLeftChild());
-            visit(root);
-            inOrder(root.getRightChild());
-        }
-    }
-
-    /**
-     * 深度优先后序遍历
-     *
-     * @param root
-     */
-    public void postOrder(BinaryTreeNode root) {
-        if (root != null) {
-            postOrder(root.getLeftChild());
-            postOrder(root.getRightChild());
-            visit(root);
-        }
-    }
-
-    /**
-     * 广度优先遍历(借助队列实现)
-     *
-     * @param root
-     */
-    public void levelOrder(BinaryTreeNode root) {
-        Queue<BinaryTreeNode> nodeQueue = Queues.newLinkedBlockingQueue();
-        BinaryTreeNode currentNode = root;
-        if (currentNode != null) {
-            nodeQueue.add(currentNode);
-        }
-
-        while (!nodeQueue.isEmpty()) {
-            currentNode = nodeQueue.poll();
-            visit(currentNode);
-
-            if (currentNode.getLeftChild() != null) {
-                nodeQueue.add(currentNode.getLeftChild());
-            }
-
-            if (currentNode.getRightChild() != null) {
-                nodeQueue.add(currentNode.getRightChild());
             }
         }
-
-
     }
 
-    /**
-     * 创建二叉树
-     *
-     * @param info
-     * @param leftTree
-     * @param rightTree
-     * @return
-     */
-    public BinaryTree createTree(int info, BinaryTree leftTree, BinaryTree rightTree) {
-        BinaryTree tree = new BinaryTree();
-        tree.setRoot(new BinaryTreeNode(info, leftTree.getRoot(), rightTree.getRoot()));
-        leftTree.setRoot(null);
-        rightTree.setRoot(null);
+    public boolean remove(int value) {
+        BinaryTreeNode temp = find(value);
 
-        return tree;
+        if (temp == null || temp.getData() != value) {
+            return false;
+        }
+
+        if (temp.getRight() == null && temp.getLeft() == null) {
+            if (temp == root) {
+                setRoot(null);
+            } else if (temp.getParent().getData() < temp.getData()) {
+                temp.getParent().setRight(null);
+            } else {
+                temp.getParent().setLeft(null);
+            }
+
+            return true;
+        } else if (temp.getLeft() != null && temp.getRight() != null) {
+            BinaryTreeNode successor = findSuccessor(temp);
+
+            successor.setLeft(temp.getLeft());
+            successor.getLeft().setParent(successor);
+
+            if (successor.getRight() != null && successor.getParent() != temp) {
+                successor.getRight().setParent(successor.getRight());
+                successor.getParent().setLeft(successor.getRight());
+                successor.setRight(temp.getRight());
+                successor.getRight().setParent(successor);
+            }
+
+            if (temp == root) {
+                successor.setParent(null);
+                root = successor;
+                return true;
+            } else {
+                successor.setParent(temp.getParent());
+
+                if (temp.getParent().getData() < temp.getData()) {
+                    temp.getParent().setRight(successor);
+                } else {
+                    temp.getParent().setLeft(successor);
+                }
+
+                return true;
+            }
+        } else {
+            if (temp.getRight() != null) {
+                if (temp == root) {
+                    setRoot(temp.getRight());
+                    return true;
+                }
+
+                temp.getRight().setParent(temp.getParent());
+                if (temp.getData() < temp.getParent().getData()) {
+                    temp.getParent().setLeft(temp.getRight());
+                } else {
+                    temp.getParent().setRight(temp.getRight());
+                }
+
+                return true;
+            } else {
+                if (temp == root) {
+                    root = temp.getLeft();
+                    return true;
+                }
+
+                temp.getLeft().setParent(temp.getParent());
+                if (temp.getData() < temp.getParent().getData()) {
+                    temp.getParent().setLeft(temp.getLeft());
+                } else {
+                    temp.getParent().setRight(temp.getLeft());
+                }
+
+                return true;
+            }
+        }
+    }
+
+    private BinaryTreeNode findSuccessor(BinaryTreeNode n) {
+        if (n.getRight() == null) {
+            return n;
+        }
+
+        BinaryTreeNode current = n.getRight();
+        BinaryTreeNode parent = n.getRight();
+        while (current != null) {
+            parent = current;
+            current = current.getLeft();
+        }
+
+        return parent;
     }
 }
