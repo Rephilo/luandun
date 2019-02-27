@@ -253,9 +253,5 @@ public class BinaryTree {
 
         return result;
     }
-
-//    public BinaryTree generationTree(int[] data){
-//
-//    }
 }
 
