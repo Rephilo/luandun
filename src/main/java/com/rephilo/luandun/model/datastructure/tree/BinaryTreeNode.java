@@ -6,50 +6,50 @@ package com.rephilo.luandun.model.datastructure.tree;
  * @author rephilo
  */
 public class BinaryTreeNode {
-    private int value;
+    private int data;
 
-    private BinaryTreeNode leftChild;
+    private BinaryTreeNode left;
 
-    private BinaryTreeNode rightChild;
+    private BinaryTreeNode right;
+
+    private BinaryTreeNode parent;
+
+    public int getData() {
+        return data;
+    }
+
+    public void setData(int data) {
+        this.data = data;
+    }
+
+    public BinaryTreeNode getLeft() {
+        return left;
+    }
+
+    public void setLeft(BinaryTreeNode left) {
+        this.left = left;
+    }
+
+    public BinaryTreeNode getRight() {
+        return right;
+    }
+
+    public void setRight(BinaryTreeNode right) {
+        this.right = right;
+    }
+
+    public BinaryTreeNode getParent() {
+        return parent;
+    }
+
+    public void setParent(BinaryTreeNode parent) {
+        this.parent = parent;
+    }
+
+    public BinaryTreeNode(int data) {
+        this.data = data;
+    }
 
     public BinaryTreeNode() {
-
-    }
-
-    public BinaryTreeNode(int value) {
-        this.value = value;
-    }
-
-    public BinaryTreeNode(int value, BinaryTreeNode leftChild, BinaryTreeNode rightChild) {
-        this.value = value;
-        this.leftChild = leftChild;
-        this.rightChild = rightChild;
-    }
-
-//    public abstract boolean isLeaf();
-
-
-    public int getValue() {
-        return value;
-    }
-
-    public void setValue(int value) {
-        this.value = value;
-    }
-
-    public BinaryTreeNode getLeftChild() {
-        return leftChild;
-    }
-
-    public void setLeftChild(BinaryTreeNode leftChild) {
-        this.leftChild = leftChild;
-    }
-
-    public BinaryTreeNode getRightChild() {
-        return rightChild;
-    }
-
-    public void setRightChild(BinaryTreeNode rightChild) {
-        this.rightChild = rightChild;
     }
 }

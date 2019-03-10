@@ -1,10 +1,12 @@
 package com.rephilo.luandun.utils;
 
+import com.google.common.collect.Lists;
 import com.rephilo.luandun.model.datastructure.tree.BinaryTreeNode;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * 操作工具包
@@ -38,12 +40,30 @@ public class LuandunUtils {
         return true;
     }
 
-//    public static <T> boolean isLessThan(BinaryTreeNode<T> left, BinaryTreeNode<T> right) {
-//        if (left.getValue() instanceof Integer &&
-//                right.getValue() instanceof Integer) {
-//            return (Integer) left.getValue() < (Integer) right.getValue();
-//        } else {
-//            return false;
-//        }
-//    }
+    /**
+     * 按照矩阵格式输出数组
+     *
+     * @param array
+     * @return
+     */
+    public static List<String> layoutArray(int[][] array) {
+        return Arrays.stream(array)
+                .map(e -> String.join(",", Arrays.toString(e)))
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * 生成一个迷宫的例子
+     *
+     * @return
+     */
+    public static Character[][] getMazeExample() {
+        return new Character[][]{
+                {'*', '*', '*', '*', '*', '*', '*'},
+                {'*', '0', '*', '0', '0', '0', '*'},
+                {'*', '0', '*', '0', '*', '0', '*'},
+                {'*', '0', '0', '0', '*', '0', '*'},
+                {'*', '*', '*', '*', '*', '*', '*'}
+        };
+    }
 }
