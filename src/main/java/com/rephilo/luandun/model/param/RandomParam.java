@@ -1,7 +1,5 @@
 package com.rephilo.luandun.model.param;
 
-import lombok.Data;
-
 /**
  * 生成随机数据集合的参数
  *

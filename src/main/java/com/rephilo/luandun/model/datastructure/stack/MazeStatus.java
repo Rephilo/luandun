@@ -1,15 +1,10 @@
 package com.rephilo.luandun.model.datastructure.stack;
 
-import lombok.Getter;
-import lombok.Setter;
-
 /**
  * 迷宫问题状态类
  *
  * @author rephilo
  */
-@Getter
-@Setter
 public class MazeStatus {
     /**
      * 横坐标
@@ -31,5 +26,29 @@ public class MazeStatus {
     }
 
     public MazeStatus() {
+    }
+
+    public Integer getX() {
+        return x;
+    }
+
+    public void setX(Integer x) {
+        this.x = x;
+    }
+
+    public Integer getY() {
+        return y;
+    }
+
+    public void setY(Integer y) {
+        this.y = y;
+    }
+
+    public Integer getDirection() {
+        return direction;
+    }
+
+    public void setDirection(Integer direction) {
+        this.direction = direction;
     }
 }

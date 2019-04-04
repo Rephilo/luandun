@@ -2,23 +2,15 @@ package com.rephilo.luandun.model.datastructure.tree;
 
 
 import com.google.common.collect.Queues;
-import lombok.Getter;
-import lombok.Setter;
 
-import java.util.ArrayDeque;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Queue;
-import java.util.Stack;
 
 /**
  * 二叉树数据结构
  *
  * @author rephilo
  */
-@Getter
-@Setter
 public class BinaryTree {
     /**
      * 根节点
@@ -263,5 +255,14 @@ public class BinaryTree {
 //
 //
 //    }
+
+
+    public BinaryTreeNode getRoot() {
+        return root;
+    }
+
+    public void setRoot(BinaryTreeNode root) {
+        this.root = root;
+    }
 }
 
