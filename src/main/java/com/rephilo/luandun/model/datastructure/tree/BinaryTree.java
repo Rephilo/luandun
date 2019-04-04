@@ -249,5 +249,19 @@ public class BinaryTree {
 
         return result;
     }
+
+    double alpha = 0.3;
+
+//    BinaryTreeNode treeGeneration(BinaryTreeNode start, Integer n) {
+//        if (n < 1) {
+//            return null;
+//        }
+//
+//        Integer pivot = (int) ((n - 1) * alpha);
+//        Integer L = pivot;
+//        Integer R = n - 1 - pivot;
+//
+//
+//    }
 }
 
