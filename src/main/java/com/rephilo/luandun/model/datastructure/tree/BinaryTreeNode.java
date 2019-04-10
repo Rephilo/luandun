@@ -12,8 +12,6 @@ public class BinaryTreeNode {
 
     private BinaryTreeNode right;
 
-    private BinaryTreeNode parent;
-
     public BinaryTreeNode(int data) {
         this.data = data;
     }
@@ -40,13 +38,5 @@ public class BinaryTreeNode {
 
     public void setRight(BinaryTreeNode right) {
         this.right = right;
-    }
-
-    public BinaryTreeNode getParent() {
-        return parent;
-    }
-
-    public void setParent(BinaryTreeNode parent) {
-        this.parent = parent;
     }
 }

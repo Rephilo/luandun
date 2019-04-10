@@ -50,114 +50,130 @@ public class BinaryTree {
         return null;
     }
 
-    public void put(int value) {
-        BinaryTreeNode newNode = new BinaryTreeNode(value);
-        if (root == null) {
-            root = newNode;
-        } else {
-            BinaryTreeNode parent = find(value);
-            if (value < parent.getData()) {
-                parent.setLeft(newNode);
-                parent.getLeft().setParent(parent);
-            } else {
-                parent.setRight(newNode);
-                parent.getRight().setParent(parent);
-
-            }
+    /**
+     * 递归添加
+     *
+     * @param current
+     * @param data
+     * @return
+     */
+    private BinaryTreeNode addRecursive(BinaryTreeNode current, int data) {
+        if (current == null) {
+            return new BinaryTreeNode(data);
         }
+
+        if (data < current.getData()) {
+            current.setLeft(addRecursive(current, data));
+        } else if (current.getData() < data) {
+            current.setRight(addRecursive(current, data));
+        } else {
+            return current;
+        }
+
+        return current;
     }
 
-    public boolean remove(int value) {
-        BinaryTreeNode temp = find(value);
+    /**
+     * 插入元素
+     *
+     * @param data
+     */
+    public void add(int data) {
+        setRoot(addRecursive(getRoot(), data));
+    }
 
-        if (temp == null || temp.getData() != value) {
+    /**
+     * 递归查找
+     *
+     * @param current
+     * @param data
+     * @return
+     */
+    private boolean containsNodeRecursive(BinaryTreeNode current, int data) {
+        if (current == null) {
             return false;
         }
 
-        if (temp.getRight() == null && temp.getLeft() == null) {
-            if (temp == root) {
-                setRoot(null);
-            } else if (temp.getParent().getData() < temp.getData()) {
-                temp.getParent().setRight(null);
-            } else {
-                temp.getParent().setLeft(null);
-            }
-
+        if (current.getData() == data) {
             return true;
-        } else if (temp.getLeft() != null && temp.getRight() != null) {
-            BinaryTreeNode successor = findSuccessor(temp);
-
-            successor.setLeft(temp.getLeft());
-            successor.getLeft().setParent(successor);
-
-            if (successor.getRight() != null && successor.getParent() != temp) {
-                successor.getRight().setParent(successor.getRight());
-                successor.getParent().setLeft(successor.getRight());
-                successor.setRight(temp.getRight());
-                successor.getRight().setParent(successor);
-            }
-
-            if (temp == root) {
-                successor.setParent(null);
-                root = successor;
-                return true;
-            } else {
-                successor.setParent(temp.getParent());
-
-                if (temp.getParent().getData() < temp.getData()) {
-                    temp.getParent().setRight(successor);
-                } else {
-                    temp.getParent().setLeft(successor);
-                }
-
-                return true;
-            }
-        } else {
-            if (temp.getRight() != null) {
-                if (temp == root) {
-                    setRoot(temp.getRight());
-                    return true;
-                }
-
-                temp.getRight().setParent(temp.getParent());
-                if (temp.getData() < temp.getParent().getData()) {
-                    temp.getParent().setLeft(temp.getRight());
-                } else {
-                    temp.getParent().setRight(temp.getRight());
-                }
-
-                return true;
-            } else {
-                if (temp == root) {
-                    root = temp.getLeft();
-                    return true;
-                }
-
-                temp.getLeft().setParent(temp.getParent());
-                if (temp.getData() < temp.getParent().getData()) {
-                    temp.getParent().setLeft(temp.getLeft());
-                } else {
-                    temp.getParent().setRight(temp.getLeft());
-                }
-
-                return true;
-            }
         }
+
+        return data < current.getData() ?
+                containsNodeRecursive(current.getLeft(), data) :
+                containsNodeRecursive(current.getRight(), data);
     }
 
-    private BinaryTreeNode findSuccessor(BinaryTreeNode n) {
-        if (n.getRight() == null) {
-            return n;
+    /**
+     * 查找元素
+     *
+     * @param data
+     * @return
+     */
+    public Boolean containNode(int data) {
+        return containsNodeRecursive(root, data);
+    }
+
+    /**
+     * 找到最小元素
+     *
+     * @param root
+     * @return
+     */
+    private int findSmallestValue(BinaryTreeNode root) {
+        return root.getLeft() == null ? root.getData() : findSmallestValue(root.getLeft());
+    }
+
+    /**
+     * 递归删除
+     *
+     * @param current
+     * @param data
+     * @return
+     */
+    private BinaryTreeNode deleteRecursive(BinaryTreeNode current, int data) {
+        if (current == null) {
+            return null;
         }
 
-        BinaryTreeNode current = n.getRight();
-        BinaryTreeNode parent = n.getRight();
-        while (current != null) {
-            parent = current;
-            current = current.getLeft();
+        if (current.getData() == data) {
+            //没有子节点
+            if (current.getLeft() == null &&
+                    current.getRight() == null) {
+                return null;
+            }
+
+            //只有一边有节点
+            if (current.getRight() == null) {
+                return current.getLeft();
+            }
+
+            if (current.getLeft() == null) {
+                return current.getRight();
+            }
+
+            //两个子节点
+            int smallestValue = findSmallestValue(current.getRight());
+            current.setData(smallestValue);
+            current.setRight(deleteRecursive(current.getRight(), smallestValue));
+            return current;
         }
 
-        return parent;
+        if (data < current.getData()) {
+            current.setLeft(deleteRecursive(current.getLeft(), data));
+            return current;
+        }
+
+        current.setRight(deleteRecursive(current.getRight(), data));
+        return current;
+    }
+
+    /**
+     * 删除元素
+     *
+     * @param data
+     */
+    public void delete(int data) {
+        root = deleteRecursive(root, data);
     }
 
     /**
@@ -241,21 +257,6 @@ public class BinaryTree {
 
         return result;
     }
-
-    double alpha = 0.3;
-
-//    BinaryTreeNode treeGeneration(BinaryTreeNode start, Integer n) {
-//        if (n < 1) {
-//            return null;
-//        }
-//
-//        Integer pivot = (int) ((n - 1) * alpha);
-//        Integer L = pivot;
-//        Integer R = n - 1 - pivot;
-//
-//
-//    }
-
 
     public BinaryTreeNode getRoot() {
         return root;
