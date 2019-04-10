@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 /**
  * 生成随机数Service
@@ -30,9 +31,8 @@ public class RandomService {
                         param.getFrom(),
                         param.getTo())
                 .parallel()
-                .collect(Lists::newArrayList,
-                        List::add,
-                        List::addAll);
+                .boxed()
+                .collect(Collectors.toList());
     }
 
     /**
