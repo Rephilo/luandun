@@ -258,6 +258,18 @@ public class BinaryTree {
         return result;
     }
 
+    /**
+     * 构造一个二叉树
+     *
+     * @return
+     */
+    public BinaryTree buildBinaryTree(List<Integer> data) {
+        BinaryTree bt = new BinaryTree();
+        data.forEach(node -> bt.add(node));
+
+        return bt;
+    }
+
     public BinaryTreeNode getRoot() {
         return root;
     }
