@@ -11,7 +11,7 @@ import java.util.Map;
  * @author wangxiao15
  */
 @Service
-public class leetcodeService {
+public class LeetcodeService {
     /**
      * 001
      *
@@ -38,6 +38,7 @@ public class leetcodeService {
 
     /**
      * 002
+     *
      * @param l1
      * @param l2
      * @return
@@ -93,6 +94,34 @@ public class leetcodeService {
 
         ListNode(int x) {
             val = x;
+        }
+    }
+
+    /**
+     * 007
+     *
+     * @param x
+     * @return
+     */
+    public int reverse(int x) {
+        Integer temp = x;
+        String strTemp = temp.toString();
+        StringBuilder builder = new StringBuilder();
+        boolean nagetive = strTemp.contains("-");
+        if (nagetive) {
+            strTemp = strTemp.replace("-", "");
+            builder.append("-");
+        }
+        char[] chars = strTemp.toCharArray();
+
+        for (int i = chars.length - 1; i >= 0; i--) {
+            builder.append(chars[i]);
+        }
+        Long result = Long.valueOf(builder.toString());
+        if (result > Integer.MAX_VALUE || result < Integer.MIN_VALUE) {
+            return 0;
+        } else {
+            return result.intValue();
         }
     }
 }
