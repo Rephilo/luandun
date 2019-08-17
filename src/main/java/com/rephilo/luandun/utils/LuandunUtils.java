@@ -1,12 +1,8 @@
 package com.rephilo.luandun.utils;
 
-import com.google.common.collect.Lists;
-import com.rephilo.luandun.model.datastructure.tree.BinaryTreeNode;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * 操作工具包
