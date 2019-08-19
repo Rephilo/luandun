@@ -1,5 +1,7 @@
 package com.rephilo.luandun.model.datastructure.tree;
 
+import sun.tools.tree.ShiftLeftExpression;
+
 /**
  * 红黑树
  *
@@ -79,15 +81,16 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
      * @param h
      */
     private void flipColors(Node h) {
-        h.color = RED;
-        h.left.color = BLACK;
-        h.right.color = BLACK;
+        h.color = !h.color;
+        h.left.color = !h.left.color;
+        h.right.color = !h.right.color;
     }
 
-    private void flipColorsForDelete(Node h) {
-        h.color = BLACK;
-        h.left.color = RED;
-        h.right.color = RED;
+    /**
+     * 节点个数
+     */
+    public int size() {
+        return size(root);
     }
 
     private int size(Node x) {
@@ -96,6 +99,21 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
         } else {
             return x.N;
         }
+    }
+
+    // 查询
+    public Value get(Key key) {
+        return get(root, key);
+    }
+
+    private Value get(Node x, Key key) {
+        while (x != null) {
+            int cmp = key.compareTo(x.key);
+            if (cmp < 0) x = x.left;
+            else if (cmp > 0) x = x.right;
+            else return x.value;
+        }
+        return null;
     }
 
     /**
@@ -150,7 +168,7 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
         }
 
         if (isRed(h.left) && isRed(h.right)) {
-            flipColorsForDelete(h);
+            flipColors(h);
         }
 
         h.N = size(h.left) + size(h.right) + 1;
@@ -193,4 +211,103 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
 
         return h;
     }
+
+    /**
+     * 删除最大
+     */
+    public void deleteMax() {
+        if (isNotRed(root.left) && isNotRed(root.right)) {
+            root.color = RED;
+        }
+
+        root = deleteMax(root);
+        if (root != null) {
+            root.color = BLACK;
+        }
+    }
+
+    private Node deleteMax(Node h) {
+        if (isRed(h.left)) {
+            h = rotateRight(h);
+        }
+
+        if (h.right == null) {
+            return null;
+        }
+
+        if (isNotRed(h.right) && isNotRed(h.right.left)) {
+            h = movieRedRight(h);
+        }
+
+        return balance(h);
+    }
+
+    private Node movieRedRight(Node h) {
+        flipColors(h);
+        if (isNotRed(h.left.left)) {
+            h = rotateRight(h);
+        }
+
+        return h;
+    }
+
+    public void delete(Key key) {
+        if (isNotRed(root.left) && isNotRed(root.right)) {
+            root.color = RED;
+        }
+
+        root = delete(root, key);
+        if (root != null) {
+            root.color = BLACK;
+        }
+    }
+
+    private Node delete(Node h, Key key) {
+        if (key.compareTo(h.key) < 0) {
+            if (isNotRed(h.left) && isNotRed(h.left.left)) {
+                h = movieRedRight(h);
+            }
+
+            h.left = delete(h.left, key);
+        } else {
+            if (isRed(h.left)) {
+                h = rotateRight(h);
+            }
+
+            if (key.compareTo(h.key) == 0 && h.right == null) {
+                return null;
+            }
+
+            if (isNotRed(h.right) && isNotRed(h.right.left)) {
+                h = movieRedRight(h);
+            }
+
+            if (key.compareTo(h.key) == 0) {
+                h.value = get(h.right, min(h.right).key);
+                h.key = min(h.right).key;
+                h.right = deleteMin(h.right);
+            } else {
+                h.right = delete(h.right, key);
+            }
+        }
+
+        return balance(h);
+    }
+
+    /**
+     * 最小值
+     *
+     * @return
+     */
+    public Key min() {
+        if (root == null) return null;
+        return min(root).key;
+    }
+
+    private Node min(Node x) {
+        assert x != null;
+        if (x.left == null) return x;
+        else return min(x.left);
+    }
+
 }
