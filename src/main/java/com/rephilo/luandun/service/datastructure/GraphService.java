@@ -1,8 +1,16 @@
 package com.rephilo.luandun.service.datastructure;
 
+import com.google.common.collect.Queues;
 import com.rephilo.luandun.model.datastructure.graph.Graph;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.Queue;
+
+/**
+ * @author rephilo
+ */
 @Service
 public class GraphService {
 
@@ -49,6 +57,12 @@ public class GraphService {
         return 2.0 * G.E() / G.V();
     }
 
+    /**
+     * 计算自环个数
+     *
+     * @param G
+     * @return
+     */
     public int numberOfSelfLoops(Graph G) {
         int count = 0;
         for (int v = 0; v < G.V(); v++) {
@@ -60,5 +74,51 @@ public class GraphService {
         }
 
         return count / 2;
+    }
+
+    /**
+     * 图的深度优先遍历
+     *
+     * @param G
+     * @param s
+     */
+    public void depthFirstSearch(Graph G, int s) {
+        boolean[] marked = new boolean[G.V()];
+        int[] edgeTo = new int[G.V()];
+
+        dfs(G, s, marked, edgeTo);
+    }
+
+    private void dfs(Graph G, int v, boolean[] marked, int[] edgeTo) {
+        marked[v] = true;
+        for (int w : G.adj(v)) {
+            if (!marked[w]) {
+                edgeTo[w] = v;
+                dfs(G, w, marked, edgeTo);
+            }
+        }
+    }
+
+    public void breadFirstSearch(Graph G, int s) {
+        boolean[] marked = new boolean[G.V()];
+        int[] edgeTo = new int[G.V()];
+
+        bfs(G, s, marked, edgeTo);
+    }
+
+    private void bfs(Graph G, int s, boolean[] marked, int[] edgeTo) {
+        Queue<Integer> queue = Queues.newLinkedBlockingQueue();
+        marked[s] = true;
+        queue.add(s);
+        while (!queue.isEmpty()) {
+            int v = queue.poll();
+            for (int w : G.adj(v)) {
+                if (!marked[w]) {
+                    edgeTo[w] = v;
+                    marked[w] = true;
+                    queue.add(w);
+                }
+            }
+        }
     }
 }
