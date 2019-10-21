@@ -44,7 +44,7 @@ public class Graph {
         return E;
     }
 
-    public void addEdge(int v, int w) {
+    private void addEdge(int v, int w) {
         adj[v].add(w);
         adj[w].add(v);
         E++;
@@ -75,7 +75,7 @@ public class Graph {
      * @param v
      * @return
      */
-    public int degree(int v) {
+    private int degree(int v) {
         int degree = 0;
         for (int w : this.adj(v)) {
             degree++;

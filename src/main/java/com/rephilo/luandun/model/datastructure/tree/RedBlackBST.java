@@ -1,7 +1,5 @@
 package com.rephilo.luandun.model.datastructure.tree;
 
-import sun.tools.tree.ShiftLeftExpression;
-
 /**
  * 红黑树
  *

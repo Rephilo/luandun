@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Queue;
+import java.util.Stack;
 
 /**
  * @author rephilo
@@ -120,5 +121,39 @@ public class GraphService {
                 }
             }
         }
+    }
+
+    /**
+     * 深度优先查找图中的路径
+     *
+     * @param G
+     * @param s
+     */
+    public Iterable<Integer> depthFirstPaths(Graph G, int s, int v) {
+        boolean[] marked = new boolean[G.V()];
+        int[] edgeTo = new int[G.V()];
+
+        dfs(G, s, marked, edgeTo);
+
+        return pathTo(v, marked, edgeTo, s);
+    }
+
+    private boolean hasPathTo(int v, boolean[] marked) {
+        return marked[v];
+    }
+
+    private Iterable<Integer> pathTo(int v, boolean[] marked, int[] edgeTo, int s) {
+        if (!hasPathTo(v, marked)) {
+            return null;
+        }
+
+        Stack<Integer> path = new Stack<>();
+        for (int x = v; x != s; x = edgeTo[x]) {
+            path.push(x);
+        }
+
+        path.push(s);
+
+        return path;
     }
 }
