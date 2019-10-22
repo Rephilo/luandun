@@ -156,4 +156,21 @@ public class GraphService {
 
         return path;
     }
+
+    /**
+     * 广度优先查找图中的路径
+     *
+     * @param G
+     * @param s
+     * @param v
+     * @return
+     */
+    public Iterable<Integer> breadFirstPaths(Graph G, int s, int v) {
+        boolean[] marked = new boolean[G.V()];
+        int[] edgeTo = new int[G.V()];
+
+        bfs(G, s, marked, edgeTo);
+
+        return pathTo(v, marked, edgeTo, s);
+    }
 }
