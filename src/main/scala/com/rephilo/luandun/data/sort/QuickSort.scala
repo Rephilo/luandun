@@ -1,4 +1,4 @@
-package data.sort
+package com.rephilo.luandun.data.sort
 
 object QuickSort {
   /**

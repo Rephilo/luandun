@@ -1,4 +1,4 @@
-package data.sort
+package com.rephilo.luandun.data.sort
 
 object MergeSort {
   def mergeSort[A](list: List[A])(implicit element: A => Ordered[A]): List[A] = {

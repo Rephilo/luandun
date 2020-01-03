@@ -2,8 +2,18 @@ package com.rephilo.luandun.leetcode
 
 import scala.annotation.tailrec
 
+/**
+  * LeetCode常规题
+  */
+object LeetCode {
 
-object Search {
+  /**
+    * 074
+    *
+    * @param nums
+    * @param target
+    * @return
+    */
   def binarySearch(nums: Array[Int], target: Int): Int = {
     @tailrec
     def binarySearchRec(start: Int, end: Int): Int = {

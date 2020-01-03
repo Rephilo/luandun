@@ -103,26 +103,20 @@ public class LeetcodeService {
      * @param x
      * @return
      */
-    public int reverse(int x) {
-        Integer temp = x;
-        String strTemp = temp.toString();
-        StringBuilder builder = new StringBuilder();
-        boolean nagetive = strTemp.contains("-");
-        if (nagetive) {
-            strTemp = strTemp.replace("-", "");
-            builder.append("-");
-        }
-        char[] chars = strTemp.toCharArray();
+    public static int reverse(int x) {
+        int result = 0;
 
-        for (int i = chars.length - 1; i >= 0; i--) {
-            builder.append(chars[i]);
+        while (x != 0) {
+            int tail = x % 10;
+            int newResult = result * 10 + tail;
+            if ((newResult - tail) / 10 != result) {
+                return 0;
+            }
+            result = newResult;
+            x = x / 10;
         }
-        Long result = Long.valueOf(builder.toString());
-        if (result > Integer.MAX_VALUE || result < Integer.MIN_VALUE) {
-            return 0;
-        } else {
-            return result.intValue();
-        }
+
+        return result;
     }
 
     /**
@@ -150,5 +144,10 @@ public class LeetcodeService {
         }
 
         return -1;
+    }
+
+    public static void main(String[] args) {
+        int a = reverse(123);
+        int b = reverse(-123);
     }
 }
