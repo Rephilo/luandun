@@ -25,7 +25,7 @@
         <guava.version>28.0-jre</guava.version>
         <commons-lang3.version>3.9</commons-lang3.version>
         <swagger.version>2.9.2</swagger.version>
-        <scala.version>2.12.9</scala.version>
+        <scala.version>2.13.1</scala.version>
     </properties>
 
     <dependencies>

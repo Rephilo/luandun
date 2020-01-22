@@ -169,7 +169,6 @@ public class LeetcodeService {
     }
 
     public static void main(String[] args) {
-        int a = reverse(123);
-        int b = reverse(-123);
+
     }
 }
