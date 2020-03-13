@@ -101,5 +101,4 @@ public class SortController {
     public Object mergeSort(RandomParam param) {
         return sortService.mergeSort(randomService.getRandomNumberInts(param));
     }
-
 }
