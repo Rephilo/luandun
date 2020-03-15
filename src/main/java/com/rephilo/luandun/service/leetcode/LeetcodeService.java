@@ -152,7 +152,7 @@ public class LeetcodeService {
         return binarySearch(nums, 0, nums.length - 1, target);
     }
 
-    public static int binarySearch(int[] nums, int start, int end, int target) {
+    private static int binarySearch(int[] nums, int start, int end, int target) {
         int mid = (start + end) / 2;
         if (start > end) {
             return -1;
@@ -166,6 +166,16 @@ public class LeetcodeService {
         }
 
         return -1;
+    }
+
+    /**
+     * 1108
+     *
+     * @param address
+     * @return
+     */
+    public String defangIPaddr(String address) {
+        return address.replace(".", "[.]");
     }
 
     /**
@@ -190,13 +200,32 @@ public class LeetcodeService {
     }
 
     /**
-     * 1108
+     * 1365
      *
-     * @param address
+     * @param nums
      * @return
      */
-    public String defangIPaddr(String address) {
-        return address.replace(".", "[.]");
+    public int[] smallerNumbersThanCurrent(int[] nums) {
+        int[] count = new int[101];
+        int[] result = new int[nums.length];
+
+        for (int num : nums) {
+            count[num]++;
+        }
+
+        for (int i = 1; i <= 100; i++) {
+            count[i] += count[i - 1];
+        }
+
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] == 0) {
+                result[i] = 0;
+            } else {
+                result[i] = count[nums[i] - 1];
+            }
+        }
+
+        return result;
     }
 
     public static void main(String[] args) {

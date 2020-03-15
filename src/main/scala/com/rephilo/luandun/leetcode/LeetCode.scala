@@ -34,6 +34,16 @@ object LeetCode {
   }
 
   /**
+    * 1108
+    *
+    * @param address
+    * @return
+    */
+  def defangIPaddr(address: String): String = {
+    address.replace(".", "[.]")
+  }
+
+  /**
     * 1342
     *
     * @param num
@@ -44,8 +54,8 @@ object LeetCode {
     def steps(num: Int, count: Int): Int = {
       num match {
         case 0 => count
-        case odd if num % 2 != 0 => steps(num - 1, count + 1)
-        case even if num % 2 == 0 => steps(num / 2, count + 1)
+        case _ if num % 2 != 0 => steps(num - 1, count + 1)
+        case _ if num % 2 == 0 => steps(num / 2, count + 1)
       }
     }
 
@@ -53,12 +63,13 @@ object LeetCode {
   }
 
   /**
-    * 1108
+    * 1365
     *
-    * @param address
+    * @param nums
     * @return
     */
-  def defangIPaddr(address: String): String = {
-    address.replace(".", "[.]")
+  def smallerNumbersThanCurrent(nums: Array[Int]): Array[Int] = {
+
   }
+
 }
