@@ -32,4 +32,23 @@ object LeetCode {
 
     binarySearchRec(0, nums.length - 1)
   }
+
+  /**
+    * 1342
+    *
+    * @param num
+    * @return
+    */
+  def numberOfSteps(num: Int): Int = {
+    @tailrec
+    def steps(num: Int, count: Int): Int = {
+      num match {
+        case 0 => count
+        case odd if num % 2 != 0 => steps(num - 1, count + 1)
+        case even if num % 2 == 0 => steps(num / 2, count + 1)
+      }
+    }
+
+    steps(num, 0)
+  }
 }
