@@ -69,7 +69,7 @@ object LeetCode {
     * @return
     */
   def smallerNumbersThanCurrent(nums: Array[Int]): Array[Int] = {
-
+    null
   }
 
 }
