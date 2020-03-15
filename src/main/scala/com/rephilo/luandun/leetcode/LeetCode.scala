@@ -51,4 +51,14 @@ object LeetCode {
 
     steps(num, 0)
   }
+
+  /**
+    * 1108
+    *
+    * @param address
+    * @return
+    */
+  def defangIPaddr(address: String): String = {
+    address.replace(".", "[.]")
+  }
 }

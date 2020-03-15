@@ -189,6 +189,15 @@ public class LeetcodeService {
         return result;
     }
 
+    /**
+     * 1108
+     *
+     * @param address
+     * @return
+     */
+    public String defangIPaddr(String address) {
+        return address.replace(".", "[.]");
+    }
 
     public static void main(String[] args) {
 
