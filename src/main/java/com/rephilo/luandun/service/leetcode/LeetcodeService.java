@@ -142,6 +142,27 @@ public class LeetcodeService {
     }
 
     /**
+     * 009
+     *
+     * @param x
+     * @return
+     */
+    public static boolean isPalindrome(int x) {
+        if (x < 0) {
+            return false;
+        }
+        int reverse = 0;
+        int y = x;
+
+        while (x != 0) {
+            reverse = reverse * 10 + x % 10;
+            x = x / 10;
+        }
+
+        return y == reverse;
+    }
+
+    /**
      * 704
      *
      * @param nums
@@ -229,6 +250,6 @@ public class LeetcodeService {
     }
 
     public static void main(String[] args) {
-
+        isPalindrome(12321);
     }
 }

@@ -8,6 +8,27 @@ import scala.annotation.tailrec
 object LeetCode {
 
   /**
+    * 009
+    *
+    * @param x
+    * @return
+    */
+  def isPalindrome(x: Int): Boolean = {
+    if (x < 0) {
+      return false
+    }
+    var origin = x
+    var reverse = 0
+
+    while (origin != 0) {
+      reverse = reverse * 10 + origin % 10
+      origin = origin / 10
+    }
+
+    x == reverse
+  }
+
+  /**
     * 074
     *
     * @param nums
