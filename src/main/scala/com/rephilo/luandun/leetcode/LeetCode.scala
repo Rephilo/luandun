@@ -17,15 +17,16 @@ object LeetCode {
     if (x < 0) {
       return false
     }
-    var origin = x
-    var reverse = 0
 
-    while (origin != 0) {
-      reverse = reverse * 10 + origin % 10
-      origin = origin / 10
+    @tailrec
+    def loop(x: Int, reverse: Int): Int = {
+      x match {
+        case 0 => reverse
+        case _ if x != 0 => loop(x / 10, reverse * 10 + x % 10)
+      }
     }
 
-    x == reverse
+    x == loop(x, 0)
   }
 
   /**
@@ -92,5 +93,4 @@ object LeetCode {
   def smallerNumbersThanCurrent(nums: Array[Int]): Array[Int] = {
     null
   }
-
 }
