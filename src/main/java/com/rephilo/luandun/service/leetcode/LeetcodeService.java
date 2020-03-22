@@ -171,12 +171,12 @@ public class LeetcodeService {
     public int romanToInt(String s) {
         int result = 0;
         for (int i = 0; i < s.length() - 1; i++) {
-            int currStr = getNum(s.charAt(i));
-            int nextStr = getNum(s.charAt(i + 1));
-            if (currStr < nextStr) {
-                result -= currStr;
+            int currNum = getNum(s.charAt(i));
+            int nextNum = getNum(s.charAt(i + 1));
+            if (currNum < nextNum) {
+                result -= currNum;
             } else {
-                result += currStr;
+                result += currNum;
             }
         }
 

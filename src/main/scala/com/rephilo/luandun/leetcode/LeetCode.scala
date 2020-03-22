@@ -3,16 +3,16 @@ package com.rephilo.luandun.leetcode
 import scala.annotation.tailrec
 
 /**
-  * LeetCode常规题
-  */
+ * LeetCode常规题
+ */
 object LeetCode {
 
   /**
-    * 009
-    *
-    * @param x
-    * @return
-    */
+   * 009
+   *
+   * @param x
+   * @return
+   */
   def isPalindrome(x: Int): Boolean = {
     if (x < 0) {
       return false
@@ -30,12 +30,44 @@ object LeetCode {
   }
 
   /**
-    * 074
-    *
-    * @param nums
-    * @param target
-    * @return
-    */
+   * 013
+   *
+   * @param s
+   * @return
+   */
+  def romanToInt(s: String): Int = {
+    def getNum(currStr: Char): Int = {
+      currStr match {
+        case 'M' => 1000
+        case 'D' => 500
+        case 'C' => 100
+        case 'L' => 50
+        case 'X' => 10
+        case 'V' => 5
+        case 'I' => 1
+        case _ => 0
+      }
+    }
+
+    var result = 0
+    for (i <- 0 until s.length - 1) {
+      val currNum = getNum(s.charAt(i))
+      val nextNum = getNum(s.charAt(i + 1))
+      if (currNum < nextNum) result -= currNum
+      else result += currNum
+    }
+
+    result += getNum(s.charAt(s.length - 1))
+    result
+  }
+
+  /**
+   * 074
+   *
+   * @param nums
+   * @param target
+   * @return
+   */
   def binarySearch(nums: Array[Int], target: Int): Int = {
     @tailrec
     def binarySearchRec(start: Int, end: Int): Int = {
@@ -56,21 +88,21 @@ object LeetCode {
   }
 
   /**
-    * 1108
-    *
-    * @param address
-    * @return
-    */
+   * 1108
+   *
+   * @param address
+   * @return
+   */
   def defangIPaddr(address: String): String = {
     address.replace(".", "[.]")
   }
 
   /**
-    * 1342
-    *
-    * @param num
-    * @return
-    */
+   * 1342
+   *
+   * @param num
+   * @return
+   */
   def numberOfSteps(num: Int): Int = {
     @tailrec
     def steps(num: Int, count: Int): Int = {
@@ -85,11 +117,11 @@ object LeetCode {
   }
 
   /**
-    * 1365
-    *
-    * @param nums
-    * @return
-    */
+   * 1365
+   *
+   * @param nums
+   * @return
+   */
   def smallerNumbersThanCurrent(nums: Array[Int]): Array[Int] = {
     null
   }
