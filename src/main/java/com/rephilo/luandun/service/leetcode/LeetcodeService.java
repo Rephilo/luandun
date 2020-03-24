@@ -206,6 +206,40 @@ public class LeetcodeService {
     }
 
     /**
+     * 014
+     *
+     * @param strs
+     * @return
+     */
+    public static String longestCommonPrefix(String[] strs) {
+        if (strs.length == 0 || strs[0].isEmpty()) {
+            return "";
+        }
+        if (strs.length == 1) {
+            return strs[0];
+        }
+        boolean flag = true;
+        String a = "";
+        for (int i = 0; i < strs[0].length(); i++) {
+            a += strs[0].charAt(i);
+            for (String str : strs) {
+                if (!str.startsWith(a)) {
+                    flag = false;
+                    break;
+                }
+            }
+            if (!flag) {
+                break;
+            }
+        }
+
+        if (flag) {
+            return a;
+        }
+        return a.substring(0, a.length() - 1);
+    }
+
+    /**
      * 704
      *
      * @param nums
@@ -293,6 +327,8 @@ public class LeetcodeService {
     }
 
     public static void main(String[] args) {
-        isPalindrome(12321);
+        longestCommonPrefix(new String[]{
+                "c", "acc", "ccc"
+        });
     }
 }
