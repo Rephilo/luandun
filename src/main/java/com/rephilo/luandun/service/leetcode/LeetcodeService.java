@@ -217,7 +217,7 @@ public class LeetcodeService {
         }
         String pre = strs[0];
         for (String str : strs) {
-            while (str.indexOf(pre) != 0) {
+            while (!str.startsWith(pre)) {
                 pre = pre.substring(0, pre.length() - 1);
             }
         }
