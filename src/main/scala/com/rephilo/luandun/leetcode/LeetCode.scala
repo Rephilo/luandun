@@ -87,6 +87,16 @@ object LeetCode {
   }
 
   /**
+    * 020
+    *
+    * @param s
+    * @return
+    */
+  def isValid(s: String): Boolean = {
+
+  }
+
+  /**
     * 074
     *
     * @param nums
