@@ -35,4 +35,37 @@ public class LeetcodeChallengeService {
 //
 //        return result;
     }
+
+    /**
+     * 2nd
+     *
+     * @param n
+     * @return
+     */
+    public boolean isHappy(int n) {
+        try {
+            return duCalc(n, 1);
+        } catch (Exception ignored) {
+
+        }
+        return false;
+    }
+
+    private Boolean duCalc(int m, int times) {
+        if (times > 100) {
+            return false;
+        }
+        int result = 0;
+        while (m > 0) {
+            int i = m % 10;
+            result += i * i;
+            m = m / 10;
+        }
+
+        if (result == 1) {
+            return true;
+        } else {
+            return duCalc(result, times + 1);
+        }
+    }
 }
