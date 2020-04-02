@@ -38,6 +38,7 @@ public class LeetcodeChallengeService {
 
     /**
      * 2nd
+     * 这个题有问题 为什么会收敛到一个循环，无法证明
      *
      * @param n
      * @return
@@ -50,7 +51,6 @@ public class LeetcodeChallengeService {
         }
         return false;
     }
-
     private Boolean duCalc(int m, int times) {
         if (times > 100) {
             return false;

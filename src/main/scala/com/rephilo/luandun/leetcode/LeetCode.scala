@@ -99,7 +99,7 @@ object LeetCode {
    * @return
    */
   def isValid(s: String): Boolean = {
-    null
+    false
   }
 
   def mergeTwoLists(l1: ListNode, l2: ListNode): ListNode = {
