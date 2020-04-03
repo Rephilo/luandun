@@ -1,8 +1,6 @@
 package com.rephilo.luandun.service.leetcode;
 
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * leetcode April challenge
@@ -10,8 +8,9 @@ import java.util.Map;
  * @author wangxiao15
  */
 public class LeetcodeChallengeService {
+
     /**
-     * 1st
+     * 136
      * 常规解法，没考虑空间复杂度
      * 天秀解法，异或
      *
@@ -37,7 +36,7 @@ public class LeetcodeChallengeService {
     }
 
     /**
-     * 2nd
+     * 202
      * 这个题有问题 为什么会收敛到一个循环，无法证明
      *
      * @param n
@@ -51,6 +50,7 @@ public class LeetcodeChallengeService {
         }
         return false;
     }
+
     private Boolean duCalc(int m, int times) {
         if (times > 100) {
             return false;
@@ -67,5 +67,27 @@ public class LeetcodeChallengeService {
         } else {
             return duCalc(result, times + 1);
         }
+    }
+
+    /**
+     * 53
+     * 不太懂为什么可以转换成直接求和，看问题的角度没找对
+     *
+     * @param nums
+     * @return
+     */
+    public static int maxSubArray(int[] nums) {
+        int maxSum = nums[0];
+        for (int i = 1; i < nums.length; ++i) {
+            if (nums[i - 1] > 0) {
+                nums[i] += nums[i - 1];
+            }
+            maxSum = Math.max(nums[i], maxSum);
+        }
+        return maxSum;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(maxSubArray(new int[]{-2, 1, -3, 4, -1, 2, 1, -5, 4}));
     }
 }
