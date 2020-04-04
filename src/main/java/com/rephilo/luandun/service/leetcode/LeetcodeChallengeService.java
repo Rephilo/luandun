@@ -87,7 +87,30 @@ public class LeetcodeChallengeService {
         return maxSum;
     }
 
+    /**
+     * 283 想到了双指针，没想到简单的写法
+     *
+     * @param nums
+     */
+    public static void moveZeroes(int[] nums) {
+        if (nums == null) {
+            return;
+        }
+        int j = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] != 0) {
+                int tmp = nums[i];
+                nums[i] = nums[j];
+                nums[j] = tmp;
+                j++;
+            }
+        }
+    }
+
+
     public static void main(String[] args) {
-        System.out.println(maxSubArray(new int[]{-2, 1, -3, 4, -1, 2, 1, -5, 4}));
+        int[] param = new int[]{10, 2, 3, 0, 1, 0, 0};
+        moveZeroes(param);
+        System.out.println(Arrays.toString(param));
     }
 }
