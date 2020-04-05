@@ -3,28 +3,28 @@ package com.rephilo.luandun.leetcode
 import scala.annotation.tailrec
 
 /**
-  * leetcode April challenge
-  *
-  * @author wangxiao15
-  */
+ * leetcode April challenge
+ *
+ * @author wangxiao15
+ */
 object LeetCodeChallenge {
   /**
-    * 136
-    * 天秀解法，异或
-    *
-    * @param nums
-    * @return
-    */
+   * 136
+   * 天秀解法，异或
+   *
+   * @param nums
+   * @return
+   */
   def singleNumber(nums: Array[Int]): Int = nums.reduce(_ ^ _)
 
   /**
-    * 202
-    * 弗洛伊德循环查找算法
-    * 生成一个链表，快指针走两格，慢指针走一格，如果汇合说明是循环，如果快指针先到1则是快乐数
-    *
-    * @param n
-    * @return
-    */
+   * 202
+   * 弗洛伊德循环查找算法
+   * 生成一个链表，快指针走两格，慢指针走一格，如果汇合说明是循环，如果快指针先到1则是快乐数
+   *
+   * @param n
+   * @return
+   */
   def isHappy(n: Int): Boolean = {
     @scala.annotation.tailrec
     def squareSum(n: Int, sum: Int): Int = {
@@ -46,7 +46,18 @@ object LeetCodeChallenge {
     floydCycleFinding(n, squareSum(n, 0))
   }
 
+  /**
+   * 122
+   * sliding函数（选取的元素数，步长）
+   *
+   * @param prices
+   * @return
+   */
+  def maxProfit(prices: Array[Int]): Int = {
+    if (prices.length < 2) 0 else prices.sliding(2, 1).map(x => x(1) - x(0)).filter(_ > 0).sum
+  }
+
   def main(args: Array[String]): Unit = {
-    isHappy(2)
+
   }
 }
