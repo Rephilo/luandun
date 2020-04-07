@@ -1,6 +1,6 @@
 package com.rephilo.luandun.service.leetcode;
 
-import java.util.Arrays;
+import java.util.*;
 
 /**
  * leetcode April challenge
@@ -87,7 +87,71 @@ public class LeetcodeChallengeService {
         return maxSum;
     }
 
+    /**
+     * 283 想到了双指针，没想到简单的写法
+     *
+     * @param nums
+     */
+    public static void moveZeroes(int[] nums) {
+        if (nums == null) {
+            return;
+        }
+        int j = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] != 0) {
+                int tmp = nums[i];
+                nums[i] = nums[j];
+                nums[j] = tmp;
+                j++;
+            }
+        }
+    }
+
+    /**
+     * 122 只要后一天比前一天高，就可以按照一天一天的买进
+     *
+     * @param prices
+     * @return
+     */
+    public int maxProfit(int[] prices) {
+        int max = 0;
+        for (int i = 1; i < prices.length; i++) {
+            if (prices[i] - prices[i - 1] > 0) {
+                max += prices[i] - prices[i - 1];
+            }
+        }
+
+        return max;
+    }
+
+    /**
+     * 049
+     * 更骚的做法给每个数字映射成一个质数，相乘的积相同则属于同一个list
+     *
+     * @param strs
+     * @return
+     */
+    public List<List<String>> groupAnagrams(String[] strs) {
+        List<List<String>> result = new ArrayList<>();
+        Map<String, List<String>> tmp = new HashMap<>();
+        if (strs != null) {
+            for (String str : strs) {
+                char[] chars = str.toCharArray();
+                Arrays.sort(chars);
+                String key = String.valueOf(chars);
+                tmp.computeIfAbsent(key, k -> new ArrayList<>()).add(str);
+            }
+
+
+            result.addAll(tmp.values());
+        }
+
+        return result;
+    }
+
     public static void main(String[] args) {
-        System.out.println(maxSubArray(new int[]{-2, 1, -3, 4, -1, 2, 1, -5, 4}));
+        int[] param = new int[]{10, 2, 3, 0, 1, 0, 0};
+        moveZeroes(param);
+        System.out.println(Arrays.toString(param));
     }
 }
