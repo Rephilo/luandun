@@ -149,6 +149,30 @@ public class LeetcodeChallengeService {
         return result;
     }
 
+    /**
+     * 未知题目，有点意思啊
+     *
+     * @param arr
+     * @return
+     */
+    public int countElements(int[] arr) {
+        Map<Integer, Integer> tmp = new HashMap<>();
+        int result = 0;
+        for (int x : arr) {
+            tmp.putIfAbsent(x, 0);
+            tmp.put(x, tmp.get(x) + 1);
+        }
+
+        for (int x : arr) {
+            Integer k = tmp.get(x + 1);
+            if (k != null && k > 0) {
+                result++;
+            }
+        }
+
+        return result;
+    }
+
     public static void main(String[] args) {
         int[] param = new int[]{10, 2, 3, 0, 1, 0, 0};
         moveZeroes(param);
