@@ -45,8 +45,4 @@ object LeetCodeChallenge {
 
     floydCycleFinding(n, squareSum(n, 0))
   }
-
-  def main(args: Array[String]): Unit = {
-    isHappy(2)
-  }
 }
