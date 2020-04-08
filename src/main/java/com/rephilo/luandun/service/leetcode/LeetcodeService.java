@@ -460,6 +460,31 @@ public class LeetcodeService {
     }
 
     /**
+     * 876
+     *
+     * @param head
+     * @return
+     */
+    public static ListNode middleNode(ListNode head) {
+        int i = 0;
+        int j = 0;
+        ListNode curr = head;
+        while (curr != null) {
+            curr = curr.next;
+            i++;
+        }
+
+        int val = i / 2;
+
+        while (j < val) {
+            head = head.next;
+            j++;
+        }
+
+        return head;
+    }
+
+    /**
      * 1108
      *
      * @param address
@@ -546,11 +571,8 @@ public class LeetcodeService {
     public static void main(String[] args) {
         ListNode l1 = new ListNode(1);
         l1.next = new ListNode(2);
-        l1.next = new ListNode(4);
-
-        ListNode l2 = new ListNode(1);
-        l2.next = new ListNode(3);
-        l2.next = new ListNode(4);
-        mergeTwoLists(l1, l2);
+        l1.next.next = new ListNode(3);
+        l1.next.next.next = new ListNode(4);
+        middleNode(l1);
     }
 }
