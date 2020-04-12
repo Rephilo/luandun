@@ -2,9 +2,7 @@ package com.rephilo.luandun.service.leetcode;
 
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Stack;
+import java.util.*;
 
 /**
  * 没事写写LeetCode的题
@@ -18,6 +16,16 @@ public class LeetcodeService {
         ListNode next;
 
         ListNode(int x) {
+            val = x;
+        }
+    }
+
+    public class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode(int x) {
             val = x;
         }
     }
@@ -290,6 +298,28 @@ public class LeetcodeService {
     }
 
     /**
+     * 543
+     *
+     * @param root
+     * @return
+     */
+    public int diameterOfBinaryTree(TreeNode root) {
+        return depth(root, 0);
+    }
+
+    private int depth(TreeNode currNode, int max) {
+        if (currNode == null) {
+            return 0;
+        }
+
+        int left = depth(currNode.left, max);
+        int right = depth(currNode.right, max);
+        max = Math.max(left + right, max);
+
+        return Math.max(left, right) + 1;
+    }
+
+    /**
      * 704
      *
      * @param nums
@@ -314,6 +344,28 @@ public class LeetcodeService {
         }
 
         return -1;
+    }
+
+    /**
+     * 1046
+     *
+     * @param stones
+     * @return
+     */
+    public static int lastStoneWeight(int[] stones) {
+        PriorityQueue<Integer> pq = new PriorityQueue<>((i1, i2) -> i2 - i1);
+        for (int i : stones) {
+            pq.add(i);
+        }
+        while (pq.size() >= 2) {
+
+            int x = pq.poll();
+            int y = pq.poll();
+            if (x > y) {
+                pq.offer(x - y);
+            }
+        }
+        return pq.size() == 1 ? pq.peek() : 0;
     }
 
     /**
@@ -377,13 +429,6 @@ public class LeetcodeService {
     }
 
     public static void main(String[] args) {
-        ListNode l1 = new ListNode(1);
-        l1.next = new ListNode(2);
-        l1.next = new ListNode(4);
-
-        ListNode l2 = new ListNode(1);
-        l2.next = new ListNode(3);
-        l2.next = new ListNode(4);
-        mergeTwoLists(l1, l2);
+        lastStoneWeight(new int[]{3, 7, 2});
     }
 }
