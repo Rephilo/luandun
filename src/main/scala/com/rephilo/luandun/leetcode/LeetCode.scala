@@ -4,8 +4,8 @@ import scala.annotation.tailrec
 import scala.runtime.Nothing$
 
 /**
-  * LeetCode常规题
-  */
+ * LeetCode常规题
+ */
 object LeetCode {
 
   class ListNode(var _x: Int = 0) {
@@ -14,11 +14,11 @@ object LeetCode {
   }
 
   /**
-    * 009
-    *
-    * @param x
-    * @return
-    */
+   * 009
+   *
+   * @param x
+   * @return
+   */
   def isPalindrome(x: Int): Boolean = {
     if (x < 0) {
       return false
@@ -36,11 +36,11 @@ object LeetCode {
   }
 
   /**
-    * 013
-    *
-    * @param s
-    * @return
-    */
+   * 013
+   *
+   * @param s
+   * @return
+   */
   def romanToInt(s: String): Int = {
     def getNum(currStr: Char): Int = {
       currStr match {
@@ -68,11 +68,11 @@ object LeetCode {
   }
 
   /**
-    * 014
-    *
-    * @param strs
-    * @return
-    */
+   * 014
+   *
+   * @param strs
+   * @return
+   */
   def longestCommonPrefix(strs: Array[String]): String = {
     if (strs.isEmpty) {
       return ""
@@ -93,11 +93,11 @@ object LeetCode {
   }
 
   /**
-    * 020
-    *
-    * @param s
-    * @return
-    */
+   * 020
+   *
+   * @param s
+   * @return
+   */
   def isValid(s: String): Boolean = {
     false
   }
@@ -106,13 +106,17 @@ object LeetCode {
     null
   }
 
+  def maxSubArray(nums: Array[Int]): Int = {
+
+  }
+
   /**
-    * 074
-    *
-    * @param nums
-    * @param target
-    * @return
-    */
+   * 074
+   *
+   * @param nums
+   * @param target
+   * @return
+   */
   def binarySearch(nums: Array[Int], target: Int): Int = {
     @tailrec
     def binarySearchRec(start: Int, end: Int): Int = {
@@ -133,33 +137,33 @@ object LeetCode {
   }
 
   /**
-    * 122
-    * sliding函数（选取的元素数，步长）
-    *
-    * @param prices
-    * @return
-    */
+   * 122
+   * sliding函数（选取的元素数，步长）
+   *
+   * @param prices
+   * @return
+   */
   def maxProfit(prices: Array[Int]): Int = {
     if (prices.length < 2) 0 else prices.sliding(2, 1).map(x => x(1) - x(0)).filter(_ > 0).sum
   }
 
   /**
-    * 136
-    * 天秀解法，异或
-    *
-    * @param nums
-    * @return
-    */
+   * 136
+   * 天秀解法，异或
+   *
+   * @param nums
+   * @return
+   */
   def singleNumber(nums: Array[Int]): Int = nums.reduce(_ ^ _)
 
   /**
-    * 202
-    * 弗洛伊德循环查找算法
-    * 生成一个链表，快指针走两格，慢指针走一格，如果汇合说明是循环，如果快指针先到1则是快乐数
-    *
-    * @param n
-    * @return
-    */
+   * 202
+   * 弗洛伊德循环查找算法
+   * 生成一个链表，快指针走两格，慢指针走一格，如果汇合说明是循环，如果快指针先到1则是快乐数
+   *
+   * @param n
+   * @return
+   */
   def isHappy(n: Int): Boolean = {
     @tailrec
     def squareSum(n: Int, sum: Int): Int = {
@@ -182,21 +186,21 @@ object LeetCode {
   }
 
   /**
-    * 1108
-    *
-    * @param address
-    * @return
-    */
+   * 1108
+   *
+   * @param address
+   * @return
+   */
   def defangIPaddr(address: String): String = {
     address.replace(".", "[.]")
   }
 
   /**
-    * 1342
-    *
-    * @param num
-    * @return
-    */
+   * 1342
+   *
+   * @param num
+   * @return
+   */
   def numberOfSteps(num: Int): Int = {
     @tailrec
     def steps(num: Int, count: Int): Int = {
@@ -211,11 +215,11 @@ object LeetCode {
   }
 
   /**
-    * 1365
-    *
-    * @param nums
-    * @return
-    */
+   * 1365
+   *
+   * @param nums
+   * @return
+   */
   def smallerNumbersThanCurrent(nums: Array[Int]): Array[Int] = {
     null
   }
