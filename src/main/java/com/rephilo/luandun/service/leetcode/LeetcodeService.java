@@ -298,6 +298,146 @@ public class LeetcodeService {
     }
 
     /**
+     * 049
+     * 更骚的做法给每个数字映射成一个质数，相乘的积相同则属于同一个list
+     *
+     * @param strs
+     * @return
+     */
+    public List<List<String>> groupAnagrams(String[] strs) {
+        List<List<String>> result = new ArrayList<>();
+        Map<String, List<String>> tmp = new HashMap<>();
+        if (strs != null) {
+            for (String str : strs) {
+                char[] chars = str.toCharArray();
+                Arrays.sort(chars);
+                String key = String.valueOf(chars);
+                tmp.computeIfAbsent(key, k -> new ArrayList<>()).add(str);
+            }
+
+
+            result.addAll(tmp.values());
+        }
+
+        return result;
+    }
+
+    /**
+     * 053
+     * 不太懂为什么可以转换成直接求和，看问题的角度没找对
+     *
+     * @param nums
+     * @return
+     */
+    public static int maxSubArray(int[] nums) {
+        int maxSum = nums[0];
+        for (int i = 1; i < nums.length; ++i) {
+            if (nums[i - 1] > 0) {
+                nums[i] += nums[i - 1];
+            }
+            maxSum = Math.max(nums[i], maxSum);
+        }
+        return maxSum;
+    }
+
+    /**
+     * 122 只要后一天比前一天高，就可以按照一天一天的买进
+     *
+     * @param prices
+     * @return
+     */
+    public int maxProfit(int[] prices) {
+        int max = 0;
+        for (int i = 1; i < prices.length; i++) {
+            if (prices[i] - prices[i - 1] > 0) {
+                max += prices[i] - prices[i - 1];
+            }
+        }
+
+        return max;
+    }
+
+    /**
+     * 136
+     * 常规解法，没考虑空间复杂度
+     * 天秀解法，异或
+     *
+     * @param nums
+     * @return
+     */
+    public int singleNumber(int[] nums) {
+        return Arrays.stream(nums).reduce((x, y) -> x ^ y).orElse(0);
+//        int result = 0;
+//        Map<Integer, Integer> tempMap = new HashMap<Integer, Integer>();
+//        for (int num : nums) {
+//            tempMap.putIfAbsent(num, 0);
+//            tempMap.put(num, tempMap.get(num) + 1);
+//        }
+//
+//        for (Map.Entry<Integer, Integer> entry : tempMap.entrySet()) {
+//            if (entry.getValue() < 2) {
+//                result = entry.getKey();
+//            }
+//        }
+//
+//        return result;
+    }
+
+    /**
+     * 202
+     * 这个题有问题 为什么会收敛到一个循环，无法证明
+     *
+     * @param n
+     * @return
+     */
+    public boolean isHappy(int n) {
+        try {
+            return duCalc(n, 1);
+        } catch (Exception ignored) {
+
+        }
+        return false;
+    }
+
+    private Boolean duCalc(int m, int times) {
+        if (times > 100) {
+            return false;
+        }
+        int result = 0;
+        while (m > 0) {
+            int i = m % 10;
+            result += i * i;
+            m = m / 10;
+        }
+
+        if (result == 1) {
+            return true;
+        } else {
+            return duCalc(result, times + 1);
+        }
+    }
+
+    /**
+     * 283 想到了双指针，没想到简单的写法
+     *
+     * @param nums
+     */
+    public static void moveZeroes(int[] nums) {
+        if (nums == null) {
+            return;
+        }
+        int j = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] != 0) {
+                int tmp = nums[i];
+                nums[i] = nums[j];
+                nums[j] = tmp;
+                j++;
+            }
+        }
+    }
+
+    /**
      * 543
      *
      * @param root
@@ -344,6 +484,64 @@ public class LeetcodeService {
         }
 
         return -1;
+    }
+
+    /**
+     * 844
+     *
+     * @param S
+     * @param T
+     * @return
+     */
+    public boolean backspaceCompare(String S, String T) {
+        StringBuilder s = new StringBuilder();
+        StringBuilder t = new StringBuilder();
+        for (Character c : S.toCharArray()) {
+            if (c.equals('#')) {
+                if (s.length() > 0) {
+                    s.deleteCharAt(s.length() - 1);
+                }
+            } else {
+                s.append(c);
+            }
+        }
+
+        for (Character c : T.toCharArray()) {
+            if (c.equals('#')) {
+                if (t.length() > 0) {
+                    t.deleteCharAt(t.length() - 1);
+                }
+            } else {
+                t.append(c);
+            }
+        }
+
+        return s.toString().equals(t.toString());
+    }
+
+    /**
+     * 876
+     *
+     * @param head
+     * @return
+     */
+    public static ListNode middleNode(ListNode head) {
+        int i = 0;
+        int j = 0;
+        ListNode curr = head;
+        while (curr != null) {
+            curr = curr.next;
+            i++;
+        }
+
+        int val = i / 2;
+
+        while (j < val) {
+            head = head.next;
+            j++;
+        }
+
+        return head;
     }
 
     /**
@@ -422,6 +620,30 @@ public class LeetcodeService {
                 result[i] = 0;
             } else {
                 result[i] = count[nums[i] - 1];
+            }
+        }
+
+        return result;
+    }
+
+    /**
+     * April 7th，不在题库中的题，有点意思啊
+     *
+     * @param arr
+     * @return
+     */
+    public int countElements(int[] arr) {
+        Map<Integer, Integer> tmp = new HashMap<>();
+        int result = 0;
+        for (int x : arr) {
+            tmp.putIfAbsent(x, 0);
+            tmp.put(x, tmp.get(x) + 1);
+        }
+
+        for (int x : arr) {
+            Integer k = tmp.get(x + 1);
+            if (k != null && k > 0) {
+                result++;
             }
         }
 
