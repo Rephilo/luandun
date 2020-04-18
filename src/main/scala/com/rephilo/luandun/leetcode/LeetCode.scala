@@ -204,6 +204,15 @@ object LeetCode {
   }
 
   /**
+   * 283
+   *
+   * @param nums
+   */
+  def moveZeroes(nums: Array[Int]): Unit = {
+
+  }
+
+  /**
    * 1108
    *
    * @param address
