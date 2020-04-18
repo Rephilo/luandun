@@ -384,6 +384,16 @@ public class LeetcodeService {
     }
 
     /**
+     * 200
+     *
+     * @param grid
+     * @return
+     */
+    public int numIslands(char[][] grid) {
+
+    }
+
+    /**
      * 202
      * 这个题有问题 为什么会收敛到一个循环，无法证明
      *
@@ -415,6 +425,29 @@ public class LeetcodeService {
         } else {
             return duCalc(result, times + 1);
         }
+    }
+
+
+    /**
+     * 238 左边乘一遍，右边乘一遍
+     * 动态规划
+     *
+     * @param nums
+     * @return
+     */
+    public int[] productExceptSelf(int[] nums) {
+        int[] res = new int[nums.length];
+        int left = 1;
+        for (int i = 0; i < res.length; i++) {
+            res[i] = left;
+            left *= nums[i];
+        }
+        int right = 1;
+        for (int i = res.length - 1; i >= 0; i--) {
+            res[i] *= right;
+            right *= nums[i];
+        }
+        return res;
     }
 
     /**
@@ -478,6 +511,23 @@ public class LeetcodeService {
         max = Math.max(left + right, max);
 
         return Math.max(left, right) + 1;
+    }
+
+    /**
+     * 678
+     *
+     * @param s
+     * @return
+     */
+    public boolean checkValidString(String s) {
+        //TODO：to be resolved
+        boolean flag = false;
+        char[] chars = s.toCharArray();
+        for (char c : chars) {
+
+        }
+
+        return flag;
     }
 
     /**
@@ -720,27 +770,6 @@ public class LeetcodeService {
         return new String(newCharArray);
     }
 
-    /**
-     * 238 左边乘一遍，右边乘一遍
-     * 动态规划
-     *
-     * @param nums
-     * @return
-     */
-    public int[] productExceptSelf(int[] nums) {
-        int[] res = new int[nums.length];
-        int left = 1;
-        for (int i = 0; i < res.length; i++) {
-            res[i] = left;
-            left *= nums[i];
-        }
-        int right = 1;
-        for (int i = res.length - 1; i >= 0; i--) {
-            res[i] *= right;
-            right *= nums[i];
-        }
-        return res;
-    }
 
     public static void main(String[] args) {
         stringShift("yisxjwry", new int[][]{{1, 8}, {1, 4}, {1, 3}, {1, 6}, {0, 6}, {1, 4}, {0, 2}, {0, 1}});
