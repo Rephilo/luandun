@@ -298,6 +298,79 @@ public class LeetcodeService {
     }
 
     /**
+     * 033
+     *
+     * @param nums
+     * @param target
+     * @return
+     */
+    public static int search33(int[] nums, int target) {
+        if (nums == null || nums.length == 0) {
+            return -1;
+        }
+
+        if (nums.length == 1) {
+            return nums[0] == target ? 0 : -1;
+        }
+
+        int boundIndex = findBoundIndex(nums, 0, nums.length - 1);
+        if (boundIndex <= 0) {
+            return binarySearch(nums, 0, nums.length - 1, target);
+        } else if (nums[boundIndex] == target) {
+            return boundIndex;
+        } else if (nums[0] > target) {
+            return binarySearch(nums, boundIndex, nums.length - 1, target);
+        } else {
+            return binarySearch(nums, 0, boundIndex - 1, target);
+        }
+    }
+
+    /**
+     * 寻找轴值
+     *
+     * @param nums
+     * @return
+     */
+    public static int findBoundIndex(int[] nums, int left, int right) {
+        if (left == right) {
+            return -1;
+        }
+        int mid = (left + right) / 2;
+
+        //最左边情况
+        if (mid == 0) {
+            if (nums[mid] > nums[mid + 1]) {
+                return mid + 1;
+            } else {
+                return -1;
+            }
+        }
+
+        //最右边情况
+        if (mid == nums.length - 1) {
+            if (nums[mid - 1] > nums[mid]) {
+                return mid;
+            } else {
+                return -1;
+            }
+        }
+
+        //找到部分顺序队列
+        if (nums[mid - 1] < nums[mid] && nums[mid] < nums[mid + 1]) {
+            int l = findBoundIndex(nums, left, mid);
+            int r = findBoundIndex(nums, mid + 1, right);
+
+            return Math.max(l, r);
+        } else {
+            if (nums[mid] > nums[mid - 1]) {
+                return mid + 1;
+            } else {
+                return mid;
+            }
+        }
+    }
+
+    /**
      * 049
      * 更骚的做法给每个数字映射成一个质数，相乘的积相同则属于同一个list
      *
@@ -490,7 +563,6 @@ public class LeetcodeService {
             return duCalc(result, times + 1);
         }
     }
-
 
     /**
      * 238 左边乘一遍，右边乘一遍
@@ -847,6 +919,6 @@ public class LeetcodeService {
 
 
     public static void main(String[] args) {
-        stringShift("yisxjwry", new int[][]{{1, 8}, {1, 4}, {1, 3}, {1, 6}, {0, 6}, {1, 4}, {0, 2}, {0, 1}});
+        search33(new int[]{3, 1}, 3);
     }
 }
