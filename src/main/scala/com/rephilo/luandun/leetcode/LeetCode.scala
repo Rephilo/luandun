@@ -181,6 +181,26 @@ object LeetCode {
   def singleNumber(nums: Array[Int]): Int = nums.reduce(_ ^ _)
 
   /**
+    * 201
+    *
+    * @param m
+    * @param n
+    * @return
+    */
+  def rangeBitwiseAnd(m: Int, n: Int): Int = {
+    @tailrec
+    def calc(m: Int, n: Int, step: Int): Int = {
+      if (m == n) {
+        n << step
+      } else {
+        calc(m >> 1, n >> 1, step + 1)
+      }
+    }
+
+    calc(m, n, 0)
+  }
+
+  /**
     * 202
     * 弗洛伊德循环查找算法
     * 生成一个链表，快指针走两格，慢指针走一格，如果汇合说明是循环，如果快指针先到1则是快乐数
