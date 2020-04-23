@@ -671,6 +671,27 @@ public class LeetcodeService {
     }
 
     /**
+     * 560
+     *
+     * @param nums
+     * @param k
+     * @return
+     */
+    public int subarraySum(int[] nums, int k) {
+        int count = 0, sum = 0;
+        HashMap<Integer, Integer> map = new HashMap<>();
+        map.put(0, 1);
+        for (int num : nums) {
+            sum += num;
+            if (map.containsKey(sum - k)) {
+                count += map.get(sum - k);
+            }
+            map.put(sum, map.getOrDefault(sum, 0) + 1);
+        }
+        return count;
+    }
+
+    /**
      * 678
      * 贪心算法，检查左右是否匹配，将*处理成边界值，如果最终的结果区间包含0则返回true
      *
