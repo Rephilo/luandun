@@ -18,6 +18,12 @@ object LeetCode {
     def dimensions(): Array[Int]
   }
 
+  class TreeNode(_value: Int = 0, _left: TreeNode = null, _right: TreeNode = null) {
+    var value: Int = _value
+    var left: TreeNode = _left
+    var right: TreeNode = _right
+  }
+
   /**
     * 009
     *
@@ -169,6 +175,24 @@ object LeetCode {
     */
   def maxProfit(prices: Array[Int]): Int = {
     if (prices.length < 2) 0 else prices.sliding(2, 1).map(x => x(1) - x(0)).filter(_ > 0).sum
+  }
+
+  /**
+    * 124
+    *
+    * @param root
+    * @return
+    */
+  def maxPathSum(root: TreeNode): Int = {
+    @tailrec
+    def getMaxPathSum(currNode: TreeNode, max: Int): Int = {
+      if (currNode == null) {
+        return 0
+      }
+
+    }
+
+    getMaxPathSum(root, Int.MinValue)
   }
 
   /**

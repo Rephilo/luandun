@@ -21,16 +21,6 @@ public class LeetcodeService {
         }
     }
 
-    public class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-
-        TreeNode(int x) {
-            val = x;
-        }
-    }
-
     public static class BinaryMatrix {
         private int[][] matrix;
 
@@ -47,6 +37,25 @@ public class LeetcodeService {
 
         BinaryMatrix(int[][] param) {
             this.matrix = param;
+        }
+    }
+
+    public class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode() {
+        }
+
+        TreeNode(int val) {
+            this.val = val;
+        }
+
+        TreeNode(int val, TreeNode left, TreeNode right) {
+            this.val = val;
+            this.left = left;
+            this.right = right;
         }
     }
 
@@ -1140,6 +1149,34 @@ public class LeetcodeService {
             handle(value);
         }
     }
+
+    /**
+     * 124
+     *
+     * @param root
+     * @return
+     */
+    int max = Integer.MIN_VALUE;
+
+    public int maxPathSum(TreeNode root) {
+        getMaxPathSum(root);
+        return max;
+    }
+
+    public int getMaxPathSum(TreeNode currNode) {
+        if (currNode == null) {
+            return 0;
+        }
+
+        int tmp = currNode.val;
+        int left = Math.max(getMaxPathSum(currNode.left), 0);
+        int right = Math.max(getMaxPathSum(currNode.right), 0);
+
+        max = Math.max(max, tmp + left + right);
+
+        return currNode.val + Math.max(left, right);
+    }
+
 
     public static void main(String[] args) {
         FirstUnique firstUnique = new FirstUnique(new int[]{2, 3, 5});
