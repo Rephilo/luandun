@@ -184,15 +184,16 @@ object LeetCode {
     * @return
     */
   def maxPathSum(root: TreeNode): Int = {
-    @tailrec
-    def getMaxPathSum(currNode: TreeNode, max: Int): Int = {
-      if (currNode == null) {
-        return 0
-      }
-
-    }
-
-    getMaxPathSum(root, Int.MinValue)
+    //    @tailrec
+    //    def getMaxPathSum(currNode: TreeNode, max: Int): Int = {
+    //      if (currNode == null) {
+    //        return 0
+    //      }
+    //
+    //    }
+    //
+    //    getMaxPathSum(root, Int.MinValue)
+    return 0
   }
 
   /**

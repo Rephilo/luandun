@@ -40,7 +40,7 @@ public class LeetcodeService {
         }
     }
 
-    public class TreeNode {
+    public static class TreeNode {
         int val;
         TreeNode left;
         TreeNode right;
@@ -508,6 +508,33 @@ public class LeetcodeService {
         }
 
         return max;
+    }
+
+    /**
+     * 124
+     *
+     * @param root
+     * @return
+     */
+    int max = Integer.MIN_VALUE;
+
+    public int maxPathSum(TreeNode root) {
+        getMaxPathSum(root);
+        return max;
+    }
+
+    public int getMaxPathSum(TreeNode currNode) {
+        if (currNode == null) {
+            return 0;
+        }
+
+        int tmp = currNode.val;
+        int left = Math.max(getMaxPathSum(currNode.left), 0);
+        int right = Math.max(getMaxPathSum(currNode.right), 0);
+
+        max = Math.max(max, tmp + left + right);
+
+        return currNode.val + Math.max(left, right);
     }
 
     /**
@@ -1151,41 +1178,41 @@ public class LeetcodeService {
     }
 
     /**
-     * 124
+     * April 30th
      *
      * @param root
+     * @param arr
      * @return
      */
-    int max = Integer.MIN_VALUE;
-
-    public int maxPathSum(TreeNode root) {
-        getMaxPathSum(root);
-        return max;
+    public static boolean isValidSequence(TreeNode root, int[] arr) {
+        return isValidSequenceDfs(root, arr, 0);
     }
 
-    public int getMaxPathSum(TreeNode currNode) {
-        if (currNode == null) {
-            return 0;
+    private static boolean isValidSequenceDfs(TreeNode curr, int[] arr, int i) {
+        //i超过数组长度则说明不匹配，直接返回false
+        if (i >= arr.length) {
+            return false;
+        }
+        //走到null节点
+        if (curr == null) {
+            return false;
+        }
+        //当前节点字符和正在校验的字符不一致则直接返回false
+        if (curr.val != arr[i]) {
+            return false;
+        }
+        //当前节点如果是最后一位，则需要是叶子节点
+        if (i == arr.length - 1) {
+            return curr.left == null && curr.right == null;
         }
 
-        int tmp = currNode.val;
-        int left = Math.max(getMaxPathSum(currNode.left), 0);
-        int right = Math.max(getMaxPathSum(currNode.right), 0);
+        boolean left = isValidSequenceDfs(curr.left, arr, i + 1);
+        boolean right = isValidSequenceDfs(curr.right, arr, i + 1);
 
-        max = Math.max(max, tmp + left + right);
-
-        return currNode.val + Math.max(left, right);
+        return left || right;
     }
 
-
     public static void main(String[] args) {
-        FirstUnique firstUnique = new FirstUnique(new int[]{2, 3, 5});
-        firstUnique.showFirstUnique(); // return 2
-        firstUnique.add(5);            // the queue is now [2,3,5,5]
-        firstUnique.showFirstUnique(); // return 2
-        firstUnique.add(2);            // the queue is now [2,3,5,5,2]
-        firstUnique.showFirstUnique(); // return 3
-        firstUnique.add(3);            // the queue is now [2,3,5,5,2,3]
-        firstUnique.showFirstUnique(); // return -1
+
     }
 }
