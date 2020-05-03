@@ -887,6 +887,29 @@ public class LeetcodeService {
     }
 
     /**
+     * 771
+     *
+     * @param J
+     * @param S
+     * @return
+     */
+    public int numJewelsInStones(String J, String S) {
+        int result = 0;
+        HashSet<Character> set = new HashSet<>();
+        for (char j : J.toCharArray()) {
+            set.add(j);
+        }
+
+        for (char s : S.toCharArray()) {
+            if (set.contains(s)) {
+                result++;
+            }
+        }
+
+        return result;
+    }
+
+    /**
      * 844
      *
      * @param S
