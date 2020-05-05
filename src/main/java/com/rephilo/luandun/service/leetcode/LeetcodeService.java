@@ -807,6 +807,42 @@ public class LeetcodeService {
     }
 
     /**
+     * 387
+     *
+     * @param s
+     * @return
+     */
+    public static int firstUniqChar(String s) {
+//        int[] arr = new int[26];
+//        int result = -1;
+//        char[] array = s.toCharArray();
+//        for (char c : array) {
+//            arr[c - 97] += 1;
+//        }
+//
+//        for (int i = 0; i < array.length; i++) {
+//            if (arr[array[i] - 97] == 1) {
+//                result = result + i + 1;
+//                break;
+//            }
+//        }
+//
+//        return result;
+        int result = Integer.MAX_VALUE;
+
+        for (char c = 'a'; c <= 'z'; c++) {
+            int index = s.indexOf(c);
+
+            if (index != -1 &&
+                    index == s.lastIndexOf(c)) {
+                result = Math.min(result, index);
+            }
+        }
+
+        return result == Integer.MAX_VALUE ? -1 : result;
+    }
+
+    /**
      * 476
      * 位运算确实是弱项，需要再学习
      *
@@ -1319,6 +1355,6 @@ public class LeetcodeService {
     }
 
     public static void main(String[] args) {
-
+        firstUniqChar("leetcode");
     }
 }
