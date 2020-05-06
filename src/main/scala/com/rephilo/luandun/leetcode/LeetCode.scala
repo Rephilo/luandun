@@ -255,12 +255,62 @@ object LeetCode {
   }
 
   /**
+   * 278
+   *
+   * @param n
+   * @return
+   */
+  def firstBadVersion(n: Int): Int = {
+    val left = 1
+    val right = n
+
+    @scala.annotation.tailrec
+    def calc(left: Int, right: Int): Int = {
+      if (left >= right) {
+        return left
+      } else {
+        val mid = left + (right - left) / 2
+        if (isBadVersion(mid)) {
+          calc(left, mid)
+        } else {
+          calc(mid + 1, right)
+        }
+      }
+    }
+
+    def isBadVersion(n: Int): Boolean = {
+      return false
+    }
+
+    calc(left, right)
+  }
+
+  /**
     * 283
     *
     * @param nums
     */
   def moveZeroes(nums: Array[Int]): Unit = {
 
+  }
+
+  /**
+   * 476
+   * 不知道为啥执行不下去呀
+   *
+   * @param num
+   * @return
+   */
+  def findComplement(num: Int): Int = {
+    @tailrec
+    def calc(num: Int, c: Int): Int = {
+      num match {
+        case _ if (num <= 0) => num ^ c
+        case _ => calc(num >> 1, (c << 1) + 1)
+      }
+    }
+
+    calc(num, 0)
   }
 
   /**
