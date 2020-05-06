@@ -206,6 +206,16 @@ object LeetCode {
   def singleNumber(nums: Array[Int]): Int = nums.reduce(_ ^ _)
 
   /**
+    * 169
+    *
+    * @param nums
+    * @return
+    */
+  def majorityElement(nums: Array[Int]): Int = {
+
+  }
+
+  /**
     * 201
     *
     * @param m
@@ -255,11 +265,11 @@ object LeetCode {
   }
 
   /**
-   * 278
-   *
-   * @param n
-   * @return
-   */
+    * 278
+    *
+    * @param n
+    * @return
+    */
   def firstBadVersion(n: Int): Int = {
     val left = 1
     val right = n
@@ -295,12 +305,12 @@ object LeetCode {
   }
 
   /**
-   * 476
-   * 不知道为啥执行不下去呀
-   *
-   * @param num
-   * @return
-   */
+    * 476
+    * 不知道为啥执行不下去呀
+    *
+    * @param num
+    * @return
+    */
   def findComplement(num: Int): Int = {
     @tailrec
     def calc(num: Int, c: Int): Int = {
