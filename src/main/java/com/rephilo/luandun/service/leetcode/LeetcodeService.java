@@ -821,6 +821,26 @@ public class LeetcodeService {
     }
 
     /**
+     * 367
+     * 牛顿迭代法
+     * 看不懂看不懂，等后面总结一波
+     *
+     * @param num
+     * @return
+     */
+    public boolean isPerfectSquare(int num) {
+        if (num < 2) {
+            return true;
+        }
+
+        long x = num / 2;
+        while (x * x > num) {
+            x = (x + num / x) / 2;
+        }
+        return (x * x == num);
+    }
+
+    /**
      * 383
      *
      * @param ransomNote
@@ -1477,4 +1497,5 @@ public class LeetcodeService {
     public static void main(String[] args) {
         majorityElement(new int[]{3, 2, 3});
     }
+
 }
