@@ -21,16 +21,6 @@ public class LeetcodeService {
         }
     }
 
-    public class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-
-        TreeNode(int x) {
-            val = x;
-        }
-    }
-
     public static class BinaryMatrix {
         private int[][] matrix;
 
@@ -50,6 +40,24 @@ public class LeetcodeService {
         }
     }
 
+    public static class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode() {
+        }
+
+        TreeNode(int val) {
+            this.val = val;
+        }
+
+        TreeNode(int val, TreeNode left, TreeNode right) {
+            this.val = val;
+            this.left = left;
+            this.right = right;
+        }
+    }
 
     /**
      * 001
@@ -435,6 +443,26 @@ public class LeetcodeService {
     }
 
     /**
+     * 055
+     *
+     * @param nums
+     * @return
+     */
+    public boolean canJump(int[] nums) {
+        int max = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (i <= max) {
+                max = Math.max(max, i + nums[i]);
+                if (max >= nums.length - 1) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    /**
      * 064
      * 经典动态规划
      *
@@ -483,6 +511,33 @@ public class LeetcodeService {
     }
 
     /**
+     * 124
+     *
+     * @param root
+     * @return
+     */
+    int max = Integer.MIN_VALUE;
+
+    public int maxPathSum(TreeNode root) {
+        getMaxPathSum(root);
+        return max;
+    }
+
+    public int getMaxPathSum(TreeNode currNode) {
+        if (currNode == null) {
+            return 0;
+        }
+
+        int tmp = currNode.val;
+        int left = Math.max(getMaxPathSum(currNode.left), 0);
+        int right = Math.max(getMaxPathSum(currNode.right), 0);
+
+        max = Math.max(max, tmp + left + right);
+
+        return currNode.val + Math.max(left, right);
+    }
+
+    /**
      * 136
      * 常规解法，没考虑空间复杂度
      * 天秀解法，异或
@@ -506,6 +561,96 @@ public class LeetcodeService {
 //        }
 //
 //        return result;
+    }
+
+    /**
+     * 146
+     */
+    static class LRUCache {
+        private Map<Integer, Integer> cacheMap;
+        private final int capacity;
+        private ListNode head;
+        private ListNode tail;
+
+        public LRUCache(int capacity) {
+            this.capacity = capacity;
+            this.cacheMap = new LinkedHashMap<>(capacity);
+        }
+
+        public int get(int key) {
+            if (!cacheMap.containsKey(key)) {
+                return -1;
+            }
+
+            Integer val = cacheMap.remove(key);
+            cacheMap.put(key, val);
+            return val;
+        }
+
+        public void put(int key, int value) {
+            if (cacheMap.containsKey(key)) {
+                cacheMap.remove(key);
+                cacheMap.put(key, value);
+                return;
+            }
+            cacheMap.put(key, value);
+            //超出capacity，删除最久没用的,利用迭代器，删除第一个
+            if (cacheMap.size() > capacity) {
+                cacheMap.remove(cacheMap.entrySet().iterator().next().getKey());
+            }
+        }
+    }
+
+    /**
+     * 169
+     * 摩尔投票法
+     * （拉出来中路solo，剩下的一定是大于n/2的数）
+     *
+     * @param nums
+     * @return
+     */
+    public static int majorityElement(int[] nums) {
+//        int size = nums.length;
+//        int max = -1;
+//        Map<Integer, Integer> countMap = new HashMap<>();
+//        Arrays.stream(nums).forEach(x -> {
+//            countMap.putIfAbsent(x, 0);
+//            countMap.put(x, countMap.get(x) + 1);
+//        });
+//
+//        for (Map.Entry<Integer, Integer> entry : countMap.entrySet()) {
+//            if (entry.getValue() >= size / 2) {
+//                if (countMap.get(max) == null) {
+//                    max = entry.getKey();
+//                } else {
+//                    if (countMap.get(max) < entry.getValue()) {
+//                        max = entry.getKey();
+//                    }
+//                }
+//
+//            }
+//        }
+//
+//        return max;
+        if (nums == null || nums.length == 0) {
+            return 0;
+        }
+        int major = nums[0];
+        int count = 0;
+        for (int num : nums) {
+            if (count == 0) {
+                major = num;
+                count = 1;
+            } else {
+                if (num == major) {
+                    count += 1;
+                } else {
+                    count -= 1;
+                }
+            }
+        }
+
+        return major;
     }
 
     /**
@@ -549,6 +694,28 @@ public class LeetcodeService {
         dfs(grid, r + 1, c);
         dfs(grid, r, c - 1);
         dfs(grid, r, c + 1);
+    }
+
+    /**
+     * 201
+     * 010111 + 1 = 011000，则010111 & 011000 = 010000。那么，x & (x+1) 后几位相反数的“与操作”，结果总为0。
+     * 所以，当(m,m+1,...n-1,n)进行连续“与操作”时，会按照上述规律被抵消很大一部分，而只剩下n的前缀部分，最后只需将n归位。举个例子：
+     * <p>
+     * m = 5(0101), n = 7 (0111)。不停右移，得到n前缀部分为01，最后归位前缀得res=0100=4
+     *
+     * @param m
+     * @param n
+     * @return
+     */
+    public int rangeBitwiseAnd(int m, int n) {
+        int step = 0;
+        while (m != n) {
+            m = m >> 1;
+            n = n >> 1;
+            step++;
+        }
+
+        return n << step;
     }
 
     /**
@@ -608,6 +775,31 @@ public class LeetcodeService {
     }
 
     /**
+     * 278
+     *
+     * @param n
+     * @return
+     */
+    public int firstBadVersion(int n) {
+        int left = 0;
+        int right = n;
+        while (left < right) {
+            int mid = left + (right - left) / 2;
+            if (isBadVersion(mid)) {
+                right = mid;
+            } else {
+                left = mid + 1;
+            }
+        }
+
+        return left;
+    }
+
+    private boolean isBadVersion(int n) {
+        return false;
+    }
+
+    /**
      * 283 想到了双指针，没想到简单的写法
      *
      * @param nums
@@ -625,6 +817,120 @@ public class LeetcodeService {
                 j++;
             }
         }
+    }
+
+    /**
+     * 367
+     * 牛顿迭代法
+     * 看不懂看不懂，等后面总结一波
+     *
+     * @param num
+     * @return
+     */
+    public boolean isPerfectSquare(int num) {
+        if (num < 2) {
+            return true;
+        }
+
+        long x = num / 2;
+        while (x * x > num) {
+            x = (x + num / x) / 2;
+        }
+        return (x * x == num);
+    }
+
+    /**
+     * 383
+     *
+     * @param ransomNote
+     * @param magazine
+     * @return
+     */
+    public boolean canConstruct(String ransomNote, String magazine) {
+//        Map<Character, Integer> mag = new HashMap<>();
+//        boolean flag = true;
+//        for (char m : magazine.toCharArray()) {
+//            mag.putIfAbsent(m, 0);
+//            mag.put(m, mag.get(m) + 1);
+//        }
+//
+//        for (char r : ransomNote.toCharArray()) {
+//            if (mag.get(r) == null || mag.get(r) == 0) {
+//                flag = false;
+//                break;
+//            } else {
+//                mag.put(r, mag.get(r) - 1);
+//            }
+//        }
+//
+//        return flag;
+        if (magazine.length() < ransomNote.length()) {
+            return false;
+        }
+        int[] caps = new int[26];
+        for (char c : ransomNote.toCharArray()) {
+            int index = magazine.indexOf(c, caps[c - 'a']);
+            if (index == -1) {
+                return false;
+            }
+            caps[c - 97] = index + 1;
+        }
+        return true;
+    }
+
+    /**
+     * 387
+     *
+     * @param s
+     * @return
+     */
+    public static int firstUniqChar(String s) {
+//        int[] arr = new int[26];
+//        int result = -1;
+//        char[] array = s.toCharArray();
+//        for (char c : array) {
+//            arr[c - 97] += 1;
+//        }
+//
+//        for (int i = 0; i < array.length; i++) {
+//            if (arr[array[i] - 97] == 1) {
+//                result = result + i + 1;
+//                break;
+//            }
+//        }
+//
+//        return result;
+        int result = Integer.MAX_VALUE;
+
+        for (char c = 'a'; c <= 'z'; c++) {
+            int index = s.indexOf(c);
+
+            if (index != -1 &&
+                    index == s.lastIndexOf(c)) {
+                result = Math.min(result, index);
+            }
+        }
+
+        return result == Integer.MAX_VALUE ? -1 : result;
+    }
+
+    /**
+     * 476
+     * 位运算确实是弱项，需要再学习
+     *
+     * @param num
+     * @return
+     */
+    public int findComplement(int num) {
+        int temp = num, c = 0;
+        while (temp > 0) {
+            //根据判断条件
+            //二进制右移并赋值给temp，
+            temp >>= 1;
+            //二进制左移之后结果+1 赋值给c
+            c = (c << 1) + 1;
+        }
+        return num ^ c;
     }
 
     /**
@@ -668,6 +974,27 @@ public class LeetcodeService {
         max = Math.max(left + right, max);
 
         return Math.max(left, right) + 1;
+    }
+
+    /**
+     * 560
+     *
+     * @param nums
+     * @param k
+     * @return
+     */
+    public int subarraySum(int[] nums, int k) {
+        int count = 0, sum = 0;
+        HashMap<Integer, Integer> map = new HashMap<>();
+        map.put(0, 1);
+        for (int num : nums) {
+            sum += num;
+            if (map.containsKey(sum - k)) {
+                count += map.get(sum - k);
+            }
+            map.put(sum, map.getOrDefault(sum, 0) + 1);
+        }
+        return count;
     }
 
     /**
@@ -723,6 +1050,63 @@ public class LeetcodeService {
         }
 
         return -1;
+    }
+
+    /**
+     * 771
+     *
+     * @param J
+     * @param S
+     * @return
+     */
+    public int numJewelsInStones(String J, String S) {
+        int result = 0;
+        HashSet<Character> set = new HashSet<>();
+        for (char j : J.toCharArray()) {
+            set.add(j);
+        }
+
+        for (char s : S.toCharArray()) {
+            if (set.contains(s)) {
+                result++;
+            }
+        }
+
+        return result;
+    }
+
+    /**
+     * 733
+     *
+     * @param image
+     * @param sr
+     * @param sc
+     * @param newColor
+     * @return
+     */
+    public static int[][] floodFill(int[][] image, int sr, int sc, int newColor) {
+        if (image[sr][sc] != newColor) {
+            doFloodFill(image, sr, sc, newColor, image[sr][sc]);
+        }
+        return image;
+    }
+
+    public static void doFloodFill(int[][] image, int i, int j, int newColor, int currColor) {
+        if (i >= image.length || i < 0) {
+            return;
+        }
+
+        if (j >= image[0].length || j < 0) {
+            return;
+        }
+
+        if (image[i][j] == currColor) {
+            image[i][j] = newColor;
+            doFloodFill(image, i + 1, j, newColor, currColor);
+            doFloodFill(image, i - 1, j, newColor, currColor);
+            doFloodFill(image, i, j + 1, newColor, currColor);
+            doFloodFill(image, i, j - 1, newColor, currColor);
+        }
     }
 
     /**
@@ -783,6 +1167,68 @@ public class LeetcodeService {
         return head;
     }
 
+
+    /**
+     * 993
+     * 用两个hashMap存，好秀啊。。
+     *
+     * @param root
+     * @param x
+     * @param y
+     * @return
+     */
+    private Map<Integer, Integer> depthMap;
+    private Map<Integer, TreeNode> parentMap;
+
+    public boolean isCousins(TreeNode root, int x, int y) {
+        depthMap = new HashMap<>();
+        parentMap = new HashMap<>();
+        dfsIsCousins(root, null);
+        return depthMap.get(x).equals(depthMap.get(y))
+                && !parentMap.get(x).equals(parentMap.get(y));
+    }
+
+    private void dfsIsCousins(TreeNode curr, TreeNode parent) {
+        if (curr == null) {
+            return;
+        }
+        depthMap.put(curr.val, parent != null ? 1 + depthMap.get(parent.val) : 0);
+        parentMap.put(curr.val, parent);
+        dfsIsCousins(curr.left, curr);
+        dfsIsCousins(curr.right, curr);
+    }
+
+    /**
+     * 997
+     *
+     * @param N
+     * @param trust
+     * @return
+     */
+    public static int findJudge(int N, int[][] trust) {
+        if (trust == null || trust.length == 0) {
+            return N;
+        }
+        if (trust.length == 1) {
+            return trust[0][1];
+        }
+        int[] deped = new int[N + 1];
+        int[] dep = new int[N + 1];
+
+        for (int[] arr : trust) {
+            deped[arr[1]]++;
+            dep[arr[0]]++;
+        }
+
+        for (int i = 0; i <= N; i++) {
+            if (deped[i] == N - 1 && dep[i] == 0) {
+                return i;
+            }
+        }
+
+        return -1;
+    }
+
     /**
      * 1046
      *
@@ -813,6 +1259,67 @@ public class LeetcodeService {
      */
     public String defangIPaddr(String address) {
         return address.replace(".", "[.]");
+    }
+
+    /**
+     * 1143
+     *
+     * @param text1
+     * @param text2
+     * @return
+     */
+    public static int longestCommonSubsequence(String text1, String text2) {
+        char[] chars1 = text1.toCharArray();
+        char[] chars2 = text2.toCharArray();
+        int[][] dp = new int[chars1.length + 1][chars2.length + 1];
+
+        for (int i = 1; i <= chars1.length; i++) {
+            for (int j = 1; j <= chars2.length; j++) {
+                if (chars1[i - 1] == chars2[j - 1]) {
+                    dp[i][j] = dp[i - 1][j - 1] + 1;
+                } else {
+                    dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);
+                }
+            }
+        }
+
+        return dp[chars1.length][chars2.length];
+    }
+
+
+    /**
+     * 1232
+     * 将求斜率转为求乘积
+     * y2-y0/x2-x0 = y1-y0/x1-x0
+     *
+     * @param coordinates
+     * @return
+     */
+    public boolean checkStraightLine(int[][] coordinates) {
+        if (coordinates == null || coordinates.length < 2) {
+            return false;
+        }
+
+        if (coordinates.length == 2) {
+            return true;
+        }
+
+        int x0 = coordinates[0][0];
+        int y0 = coordinates[0][1];
+        for (int i = 2; i < coordinates.length; i++) {
+            int x1 = coordinates[i - 1][0];
+            int y1 = coordinates[i - 1][1];
+            int x2 = coordinates[i][0];
+            int y2 = coordinates[i][1];
+
+            int product1 = (y2 - y0) * (x1 - x0);
+            int product2 = (y1 - y0) * (x2 - x0);
+            if (product1 != product2) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     /**
@@ -890,7 +1397,7 @@ public class LeetcodeService {
     }
 
     /**
-     * April 14th
+     * 2020 April 14th
      *
      * @param s
      * @param shift
@@ -939,7 +1446,7 @@ public class LeetcodeService {
     }
 
     /**
-     * April 21st
+     * 2020 April 21st
      * 从矩阵的右上角设置指针，如果是1则想左移动，如果是0则向下移动，记录最左侧的数据
      *
      * @param binaryMatrix
@@ -971,7 +1478,88 @@ public class LeetcodeService {
         return result;
     }
 
-    public static void main(String[] args) {
-        leftMostColumnWithOne(new BinaryMatrix(new int[][]{{0, 0}, {1, 1}}));
+    /**
+     * 2020 April 28th
+     */
+    static class FirstUnique {
+
+        private LinkedHashMap<Integer, Integer> uniqueMap;
+        private Set<Integer> duplicate;
+
+        public FirstUnique(int[] nums) {
+            uniqueMap = new LinkedHashMap<>();
+            duplicate = new HashSet<>();
+
+            for (int num : nums) {
+                handle(num);
+            }
+        }
+
+        private void handle(int num) {
+            //已重复的直接过滤
+            if (duplicate.contains(num)) {
+                return;
+            }
+            //不在唯一表中，则直接加入唯一表
+            if (!uniqueMap.containsKey(num)) {
+                uniqueMap.put(num, num);
+            } else {
+                //在唯一表中，则从唯一表中删除，放入重复表
+                uniqueMap.remove(num);
+                duplicate.add(num);
+            }
+        }
+
+        public int showFirstUnique() {
+            if (uniqueMap.isEmpty()) {
+                return -1;
+            } else {
+                return uniqueMap.entrySet().iterator().next().getKey();
+            }
+        }
+
+        public void add(int value) {
+            handle(value);
+        }
     }
+
+    /**
+     * 2020 April 30th
+     *
+     * @param root
+     * @param arr
+     * @return
+     */
+    public static boolean isValidSequence(TreeNode root, int[] arr) {
+        return isValidSequenceDfs(root, arr, 0);
+    }
+
+    private static boolean isValidSequenceDfs(TreeNode curr, int[] arr, int i) {
+        //i超过数组长度则说明不匹配，直接返回false
+        if (i >= arr.length) {
+            return false;
+        }
+        //走到null节点
+        if (curr == null) {
+            return false;
+        }
+        //当前节点字符和正在校验的字符不一致则直接返回false
+        if (curr.val != arr[i]) {
+            return false;
+        }
+        //当前节点如果是最后一位，则需要是叶子节点
+        if (i == arr.length - 1) {
+            return curr.left == null && curr.right == null;
+        }
+
+        boolean left = isValidSequenceDfs(curr.left, arr, i + 1);
+        boolean right = isValidSequenceDfs(curr.right, arr, i + 1);
+
+        return left || right;
+    }
+
+    public static void main(String[] args) {
+        floodFill(new int[][]{{1, 1, 1}, {1, 1, 0}, {1, 0, 1}}, 1, 1, 2);
+    }
+
 }
