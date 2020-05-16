@@ -1062,6 +1062,16 @@ public class LeetcodeService {
     }
 
     /**
+     * 918
+     *
+     * @param A
+     * @return
+     */
+    public int maxSubarraySumCircular(int[] A) {
+        return 0;
+    }
+
+    /**
      * 1046
      *
      * @param stones
