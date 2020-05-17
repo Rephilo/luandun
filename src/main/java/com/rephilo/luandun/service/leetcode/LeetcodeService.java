@@ -758,37 +758,38 @@ public class LeetcodeService {
      * https://leetcode-cn.com/problems/implement-trie-prefix-tree/solution/shi-xian-trie-qian-zhui-shu-by-leetcode/
      */
     public class Trie {
-        private boolean is_string=false;
-        private Trie next[]=new Trie[26];
+        private boolean is_string = false;
+        private Trie next[] = new Trie[26];
 
-        public Trie(){}
-
-        public void insert(String word){//插入单词
-            Trie root=this;
-            char w[]=word.toCharArray();
-            for(int i=0;i<w.length;++i){
-                if(root.next[w[i]-'a']==null)root.next[w[i]-'a']=new Trie();
-                root=root.next[w[i]-'a'];
-            }
-            root.is_string=true;
+        public Trie() {
         }
 
-        public boolean search(String word){//查找单词
-            Trie root=this;
-            char w[]=word.toCharArray();
-            for(int i=0;i<w.length;++i){
-                if(root.next[w[i]-'a']==null)return false;
-                root=root.next[w[i]-'a'];
+        public void insert(String word) {//插入单词
+            Trie root = this;
+            char w[] = word.toCharArray();
+            for (int i = 0; i < w.length; ++i) {
+                if (root.next[w[i] - 'a'] == null) root.next[w[i] - 'a'] = new Trie();
+                root = root.next[w[i] - 'a'];
+            }
+            root.is_string = true;
+        }
+
+        public boolean search(String word) {//查找单词
+            Trie root = this;
+            char w[] = word.toCharArray();
+            for (int i = 0; i < w.length; ++i) {
+                if (root.next[w[i] - 'a'] == null) return false;
+                root = root.next[w[i] - 'a'];
             }
             return root.is_string;
         }
 
-        public boolean startsWith(String prefix){//查找前缀
-            Trie root=this;
-            char p[]=prefix.toCharArray();
-            for(int i=0;i<p.length;++i){
-                if(root.next[p[i]-'a']==null)return false;
-                root=root.next[p[i]-'a'];
+        public boolean startsWith(String prefix) {//查找前缀
+            Trie root = this;
+            char p[] = prefix.toCharArray();
+            for (int i = 0; i < p.length; ++i) {
+                if (root.next[p[i] - 'a'] == null) return false;
+                root = root.next[p[i] - 'a'];
             }
             return true;
         }
@@ -859,6 +860,33 @@ public class LeetcodeService {
                 j++;
             }
         }
+    }
+
+    /**
+     * 328
+     *
+     * @param head
+     * @return
+     */
+    public ListNode oddEvenList(ListNode head) {
+        if (head == null) {
+            return null;
+        }
+
+        ListNode oddTail = head;
+        ListNode evenHead = head.next;
+        ListNode evenTail = evenHead;
+
+        while (evenTail != null && evenTail.next != null) {
+            oddTail.next = evenTail.next;
+            oddTail = oddTail.next;
+            evenTail.next = oddTail.next;
+            evenTail = evenTail.next;
+        }
+
+        oddTail.next = evenHead;
+
+        return head;
     }
 
     /**
