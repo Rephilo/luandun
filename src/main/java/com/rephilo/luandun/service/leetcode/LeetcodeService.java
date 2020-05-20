@@ -701,6 +701,27 @@ public class LeetcodeService {
     }
 
     /**
+     * 230
+     *
+     * @param root
+     * @param k
+     * @return
+     */
+    public int kthSmallest(TreeNode root, int k) {
+        LinkedList<TreeNode> stack = new LinkedList<TreeNode>();
+
+        while (true) {
+            while (root != null) {
+                stack.add(root);
+                root = root.left;
+            }
+            root = stack.removeLast();
+            if (--k == 0) return root.val;
+            root = root.right;
+        }
+    }
+
+    /**
      * 238 左边乘一遍，右边乘一遍
      * 动态规划
      *
