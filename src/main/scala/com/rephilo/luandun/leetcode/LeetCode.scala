@@ -206,6 +206,19 @@ object LeetCode {
   def singleNumber(nums: Array[Int]): Int = nums.reduce(_ ^ _)
 
   /**
+    * 169
+    * 排序法
+    * 排序之后，多余一半的数字一定在中间
+    *
+    * @param nums
+    * @return
+    */
+  def majorityElement(nums: Array[Int]): Int = {
+    val sortedNums = nums.sorted
+    sortedNums(nums.length / 2)
+  }
+
+  /**
     * 201
     *
     * @param m
@@ -255,11 +268,11 @@ object LeetCode {
   }
 
   /**
-   * 278
-   *
-   * @param n
-   * @return
-   */
+    * 278
+    *
+    * @param n
+    * @return
+    */
   def firstBadVersion(n: Int): Int = {
     val left = 1
     val right = n
@@ -295,12 +308,12 @@ object LeetCode {
   }
 
   /**
-   * 476
-   * 不知道为啥执行不下去呀
-   *
-   * @param num
-   * @return
-   */
+    * 476
+    * 不知道为啥执行不下去呀
+    *
+    * @param num
+    * @return
+    */
   def findComplement(num: Int): Int = {
     @tailrec
     def calc(num: Int, c: Int): Int = {
@@ -353,7 +366,7 @@ object LeetCode {
   }
 
   /**
-    * April 21st
+    * 2020 April 21st
     *
     * @param binaryMatrix
     * @return
