@@ -1478,6 +1478,32 @@ public class LeetcodeService {
         }
     }
 
+    /**
+     * 987
+     *
+     * @param A
+     * @param B
+     * @return
+     */
+    public int[][] intervalIntersection(int[][] A, int[][] B) {
+        List<int[]> ans = new ArrayList();
+        int i = 0, j = 0;
+
+        while (i < A.length && j < B.length) {
+            int lo = Math.max(A[i][0], B[j][0]);
+            int hi = Math.min(A[i][1], B[j][1]);
+            if (lo <= hi) {
+                ans.add(new int[]{lo, hi});
+            }
+            if (A[i][1] < B[j][1]) {
+                i++;
+            } else {
+                j++;
+            }
+        }
+
+        return ans.toArray(new int[ans.size()][]);
+    }
 
     /**
      * 993
@@ -1548,6 +1574,68 @@ public class LeetcodeService {
      */
     public int maxSubarraySumCircular(int[] A) {
         return 0;
+    }
+
+    /**
+     * 1008
+     *
+     * @param preorder
+     * @return
+     */
+    public TreeNode bstFromPreorder(int[] preorder) {
+        if (preorder == null || preorder.length == 0) {
+            return null;
+        }
+
+        return buildBstFromPreorder(preorder, 0, preorder.length - 1);
+    }
+
+    /**
+     * 根据前序遍历的顺序构造二叉搜索树
+     *
+     * @param preorder
+     * @return
+     */
+    private TreeNode buildBstFromPreorder(int[] preorder, int start, int end) {
+        if (start > end) {
+            return null;
+        }
+        TreeNode node = new TreeNode(preorder[start]);
+        int i;
+        for (i = start; i <= end; i++) {
+            if (preorder[i] > node.val) {
+                break;
+            }
+        }
+
+        node.left = buildBstFromPreorder(preorder, start + 1, i - 1);
+        node.right = buildBstFromPreorder(preorder, i, end);
+
+        return node;
+    }
+
+    /**
+     * 1035
+     * 又是动态规划
+     *
+     * @param A
+     * @param B
+     * @return
+     */
+    public int maxUncrossedLines(int[] A, int[] B) {
+        int n1 = A.length;
+        int n2 = B.length;
+        int[][] dp = new int[n1 + 1][n2 + 1];
+        for (int i = 0; i < n1; i++) {
+            for (int j = 0; j < n2; j++) {
+                if (A[i] == B[j]) {
+                    dp[i + 1][j + 1] = dp[i][j] + 1;
+                } else {
+                    dp[i + 1][j + 1] = Math.max(dp[i + 1][j], dp[i][j + 1]);
+                }
+            }
+        }
+        return dp[n1][n2];
     }
 
     /**
