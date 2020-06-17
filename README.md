@@ -2,7 +2,7 @@
 
 可能是唯一指定《牌面》项目
 
-| 题号 | 题目 | java | python | scala | 不存在的总结博客 |
+| 题号 | 题目 | java | scala | python | 不存在的总结博客 |
 | --- | --- | --- | --- | --- | --- |
 | 001 | [Two Sum](https://leetcode.com/problems/two-sum) | [Solution](https://github.com/Rephilo/luandun/blob/master/src/main/java/com/rephilo/luandun/leetcode/_001/Solution.java) | | | |
 | 002 | [Add Two Numbers](https://leetcode.com/problems/add-two-numbers) | [Solution](https://github.com/Rephilo/luandun/blob/master/src/main/java/com/rephilo/luandun/leetcode/_002/Solution.java) | | | |
@@ -36,3 +36,10 @@
 | 383 | [Ransom Note](https://leetcode.com/problems/ransom-note) | [Solution](https://github.com/Rephilo/luandun/blob/master/src/main/java/com/rephilo/luandun/leetcode/_383/Solution.java) |
 | 387 | [First Unique Character in a String](https://leetcode.com/problems/first-unique-character-in-a-string) | [Solution](https://github.com/Rephilo/luandun/blob/master/src/main/java/com/rephilo/luandun/leetcode/_387/Solution.java) |
 | 402 | [Remove K Digits](https://leetcode.com/problems/remove-k-digits) | [Solution](https://github.com/Rephilo/luandun/blob/master/src/main/java/com/rephilo/luandun/leetcode/_402/Solution.java) |
+| 438 | [Find All Anagrams in a String](https://leetcode.com/problems/find-all-anagrams-in-a-string) | [Solution](https://github.com/Rephilo/luandun/blob/master/src/main/java/com/rephilo/luandun/leetcode/_438/Solution.java) |
+| 451 | [Sort Characters By Frequency](https://leetcode.com/problems/sort-characters-by-frequency) | [Solution](https://github.com/Rephilo/luandun/blob/master/src/main/java/com/rephilo/luandun/leetcode/_451/Solution.java) | 
+| 476 | [Number Complement](https://leetcode.com/problems/number-complement) | [Solution](https://github.com/Rephilo/luandun/blob/master/src/main/java/com/rephilo/luandun/leetcode/_476/Solution.java) |
+| 525 | [Contiguous Array](https://leetcode.com/problems/contiguous-array) | [Solution](https://github.com/Rephilo/luandun/blob/master/src/main/java/com/rephilo/luandun/leetcode/_525/Solution.java) |
+| 540 | [Single Element in a Sorted Array](https://leetcode.com/problems/single-element-in-a-sorted-array) | [Solution](https://github.com/Rephilo/luandun/blob/master/src/main/java/com/rephilo/luandun/leetcode/_540/Solution.java) |
+| 543 | [Diameter of Binary Tree](https://leetcode.com/problems/diameter-of-binary-tree) | [Solution](https://github.com/Rephilo/luandun/blob/master/src/main/java/com/rephilo/luandun/leetcode/_543/Solution.java) |
+| 560 | [Subarray Sum Equals K](https://leetcode.com/problems/subarray-sum-equals-k) | [Solution](https://github.com/Rephilo/luandun/blob/master/src/main/java/com/rephilo/luandun/leetcode/_560/Solution.java) |
