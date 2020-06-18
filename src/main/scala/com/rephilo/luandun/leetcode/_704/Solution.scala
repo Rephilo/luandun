@@ -1,4 +1,4 @@
-package com.rephilo.luandun.leetcode._074
+package com.rephilo.luandun.leetcode._704
 
 import scala.annotation.tailrec
 
