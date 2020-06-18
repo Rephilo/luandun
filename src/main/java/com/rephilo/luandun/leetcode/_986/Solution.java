@@ -1,4 +1,4 @@
-package com.rephilo.luandun.leetcode._987;
+package com.rephilo.luandun.leetcode._986;
 
 import java.util.ArrayList;
 import java.util.List;
