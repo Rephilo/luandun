@@ -7,7 +7,7 @@ package com.rephilo.luandun.leetcode._028;
  */
 public class Solution {
     /**
-     * 截取法1
+     * 暴力法
      * 简单方案，用截取字符串的方式进行比较，相比官方答案，这种循环写的像个人
      * 时间复杂度最坏O(nm)，找到了就O((n-m)m)，n是源字符串长度，m是目标字符串长度
      * equals方法默认时间复杂度是O(n)的
@@ -34,7 +34,8 @@ public class Solution {
     }
 
     /**
-     * 截取法2
+     * 暴力法2
+     * (双指针法就不写了，虽然我写不出来，但是给我的感觉是手动实现滑动窗口的equals)
      * 官方版截取字符串的方案，这个循环你不品品，一般人想不到。
      * 循环是从0开始，到源字符串长度-目标字符串长度，为的是防止数组越界，并且可以将循环的次数减少，和 截取法2 的 if i+j<=haystack.length 一个意思
      * 时间复杂度O((n-m)m)
@@ -64,6 +65,8 @@ public class Solution {
      * @param needle
      * @return
      */
+    private int[][] dfa;
+
     public int strStr3(String haystack, String needle) {
 
     }
