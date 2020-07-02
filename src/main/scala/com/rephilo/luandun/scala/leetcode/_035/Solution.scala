@@ -38,7 +38,7 @@ object Solution {
     @tailrec
     def binarySearch(left: Int, right: Int, nums: Array[Int], target: Int): Int = {
       val mid = left + (right - left) / 2
-      if (left < right) {
+      if (left >= right) {
         left
       } else {
         if (nums(mid) < target) {
