@@ -1,7 +1,5 @@
 package com.rephilo.luandun.leetcode._038;
 
-import scala.$less$colon$less;
-
 /**
  * 038
  *
@@ -14,8 +12,8 @@ public class Solution {
      * @param n
      * @return
      */
-    public String countAndSay(int n) {
-        return count("1", 0, n);
+    public static String countAndSay(int n) {
+        return count("1", 1, n);
     }
 
     /**
@@ -24,7 +22,7 @@ public class Solution {
      * @param n    目标次数
      * @return
      */
-    private String count(String str, int curr, int n) {
+    private static String count(String str, int curr, int n) {
         if (curr >= n) {
             return str;
         } else {
@@ -33,9 +31,11 @@ public class Solution {
     }
 
     /**
+     * 输出字符串
+     *
      * @param str
      */
-    private String say(String str) {
+    private static String say(String str) {
         char[] chars = str.toCharArray();
         char currNum = chars[0];
         int currCount = 1;
