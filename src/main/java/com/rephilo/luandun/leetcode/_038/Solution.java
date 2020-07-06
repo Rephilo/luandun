@@ -1,7 +1,5 @@
 package com.rephilo.luandun.leetcode._038;
 
-import scala.$less$colon$less;
-
 /**
  * 038
  *
