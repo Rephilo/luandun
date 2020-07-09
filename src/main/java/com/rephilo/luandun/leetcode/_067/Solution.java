@@ -23,8 +23,7 @@ public class Solution {
     }
 
     /**
-     * 末位相加，放入list然后输出
-     * 写的还是太丑陋了- -
+     * 末位相加，放入list然后输出，调整了一下，好看多了
      *
      * @param a
      * @param b
@@ -32,7 +31,7 @@ public class Solution {
      */
     public static String addBinary1(String a, String b) {
         int l = Math.max(a.length(), b.length());
-        int pre = 0;
+        int carry = 0;
         StringBuilder builder = new StringBuilder();
         for (int i = 1; i <= l; i++) {
             int currA = 0;
@@ -45,30 +44,21 @@ public class Solution {
                 currB = b.charAt(b.length() - i) - '0';
             }
 
-            int currResult = 0;
-            if (currA != currB) {
-                currResult = 1;
-                if (pre == 1) {
-                    currResult = 0;
-                    pre = 1;
-                }
-            } else {
-                currResult = currResult + pre;
-                if (currA == 0) {
-                    pre = 0;
-                } else {
-                    pre = 1;
-                }
-            }
+            int currResult = currA + currB + carry;
+            carry = currResult / 2;
 
-            builder.append(currResult);
+            builder.append(currResult % 2);
         }
 
-        if (pre == 1) {
-            builder.append(pre);
+        if (carry > 0) {
+            builder.append(carry);
         }
 
         return builder.reverse().toString();
+    }
+
+    public static void main(String[] args) {
+        addBinary1("11", "1");
     }
 
     /**
