@@ -1,9 +1,5 @@
 package com.rephilo.luandun.leetcode._067;
 
-import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * 067
  *
@@ -55,10 +51,6 @@ public class Solution {
         }
 
         return builder.reverse().toString();
-    }
-
-    public static void main(String[] args) {
-        addBinary1("11", "1");
     }
 
     /**
