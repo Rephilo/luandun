@@ -9,6 +9,8 @@ import com.rephilo.luandun.leetcode.datastructure.ListNode;
  */
 public class Solution {
     /**
+     * 有序的链表，如果当前值和next值相等，那么直接跳过next节点，
+     *
      * @param head
      * @return
      */
