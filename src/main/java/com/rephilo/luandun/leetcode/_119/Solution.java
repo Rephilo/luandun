@@ -1,32 +1,25 @@
-package com.rephilo.luandun.leetcode._118;
+package com.rephilo.luandun.leetcode._119;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 118
+ * 119
  *
  * @author rephilo
  */
 public class Solution {
-    /**
-     * 杨辉三角，啊呦看着头疼
-     *
-     * @param numRows
-     * @return
-     */
-    public static List<List<Integer>> generate(int numRows) {
+    public static List<Integer> getRow(int rowIndex) {
         List<List<Integer>> triangle = new ArrayList<>();
 
-        if (numRows > 0) {
-            for (int i = 0; i < numRows; i++) {
+        if (rowIndex > 0) {
+            for (int i = 0; i < rowIndex + 1; i++) {
                 triangle.add(new ArrayList<>());
             }
 
             triangle.get(0).add(1);
 
-
-            for (int i = 1; i < numRows; i++) {
+            for (int i = 1; i < rowIndex + 1; i++) {
                 triangle.get(i).add(1);
 
                 for (int j = 1; j < i; j++) {
@@ -35,12 +28,14 @@ public class Solution {
 
                 triangle.get(i).add(1);
             }
+        } else {
+            return new ArrayList<Integer>() {
+                {
+                    add(1);
+                }
+            };
         }
 
-        return triangle;
-    }
-
-    public static void main(String[] args) {
-        generate(4);
+        return triangle.get(rowIndex);
     }
 }
