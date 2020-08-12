@@ -35,7 +35,7 @@ public class Solution {
 
     /**
      * 之前还学了快慢指针，写写看
-     * 时间复杂度O(n)，空间复杂度O(1)
+     * 时间复杂度最坏O(n)，最优O(m-n) m是链表的循环部分，空间复杂度O(1)
      *
      * @param head
      * @return
