@@ -3,12 +3,12 @@ package com.rephilo.luandun.leetcode._901;
 import java.util.Stack;
 
 public class Solution {
-    class StockSpanner {
+    static class StockSpanner {
         Stack<Integer> prices, weights;
 
         public StockSpanner() {
-            prices = new Stack();
-            weights = new Stack();
+            prices = new Stack<>();
+            weights = new Stack<>();
         }
 
         public int next(int price) {
