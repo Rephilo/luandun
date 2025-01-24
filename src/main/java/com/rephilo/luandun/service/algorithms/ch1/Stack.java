@@ -1,6 +1,7 @@
 package com.rephilo.luandun.service.algorithms.ch1;
 
-import org.jetbrains.annotations.NotNull;
+
+import jakarta.validation.constraints.NotNull;
 
 import java.util.Iterator;
 
